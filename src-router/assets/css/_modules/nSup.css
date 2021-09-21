@@ -1,0 +1,119 @@
+
+.lNSup {
+  @apply w-full h-full hidden relative;
+}
+
+.mNSup {
+  @apply w-full table-cell align-middle text-center relative;
+}
+
+.mNSupHd {
+  @apply mb-48;
+}
+
+.mNSupTit {
+  @apply text-24;
+}
+
+.mNSupMsg {
+  @apply mb-28 px-20 pt-10 pb-20 inline-block border-1 border-x9 rounded-10;
+}
+
+.mNSupMsgTit {
+  width: 100px;
+
+  @apply mx-auto -mt-28 -mb-10 px-5 text-20 text-xf block rounded-20 bg-x76 relative;
+}
+
+.mNSupItm {
+  @apply mt-20 text-left;
+}
+
+.mNSupItmTit {
+  @apply mb-5 pl-5 text-x45 border-l-1 border-x45 leading-none;
+}
+
+.mNSupItmCnt {
+  @apply pl-8 text-15;
+}
+
+.mNSupFigList {
+  > ul {
+    @apply inline-block overflow-hidden;
+
+    > li {
+      width: width('n-sup/chrome.png');
+
+      @apply mx-20 float-left;
+    }
+  }
+}
+
+.mNSupFig {
+  @apply text-x0 block;
+
+  &::before {
+    content: "";
+    height: height('n-sup/chrome.png');
+
+    @apply w-full block bg-no-repeat bg-center;
+  }
+
+  &.\-\-chrome {
+    &::before {
+      background-image: url('n-sup/chrome.png');
+    }
+  }
+
+  &.\-\-firefox {
+    &::before {
+      background-image: url('n-sup/firefox.png');
+    }
+  }
+
+  &.\-\-edge {
+    &::before {
+      background-image: url('n-sup/edge.png');
+    }
+  }
+}
+
+.mNSupFt {
+  @apply mt-48 text-x0;
+}
+
+.mNSupDesc {
+  @apply mt-14 text-15;
+}
+
+.mNSupCor {
+  font-size: 0;
+
+  @apply my-10;
+
+  em,
+  i {
+    @apply not-italic;
+  }
+
+  > p {
+    @apply px-5 text-13;
+  }
+}
+
+@screen notsupport {
+  html,
+  body {
+    @apply h-full;
+  }
+
+  .lWrap {
+    @apply hidden;
+  }
+
+  .lNSup {
+    word-wrap: break-word;
+
+    @apply table table-auto break-all;
+  }
+}

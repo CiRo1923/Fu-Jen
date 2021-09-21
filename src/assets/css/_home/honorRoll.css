@@ -1,0 +1,170 @@
+.honorRoll {
+  &::before,
+  &::after {
+    content: "";
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% auto;
+
+    @apply absolute;
+  }
+
+  &::before {
+    background-image: url(home/honorRoll_text.svg);
+  }
+
+  &::after {
+    background-image: url(home/honorRoll_fujen.svg);
+  }
+
+  .tns-nav {
+    > button {
+      @apply border-x1479;
+
+      &.tns-nav-active {
+        @apply bg-x1479;
+      }
+    }
+  }
+}
+
+.honorRollPhotoFrame {
+  &::before {
+    content: "";
+    background: url(home/honorRoll_mask.svg) no-repeat center center;
+    background-size: 100% auto;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+
+    @apply top-1/2 left-1/2 pointer-events-none absolute;
+  }
+}
+
+.honorRollFig {
+  transform: translate(-50%, -50%);
+
+  @apply w-full h-full;
+
+  img {
+    transform: translateX(-50%);
+
+    @apply h-full max-w-none;
+  }
+}
+
+.honorRollData {
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+
+  @apply overflow-hidden;
+}
+
+@screen p {
+  .honorRoll {
+    &::before {
+      top: 40px;
+      left: 140px;
+      width: width('home/honorRoll_text.svg');
+      height: height('home/honorRoll_text.svg');
+    }
+
+    &::after {
+      top: -28px;
+      right: 116px;
+      width: 186px;
+      height: calcfun(height('home/honorRoll_fujen.svg') / width('home/honorRoll_fujen.svg') * 186px);
+    }
+
+    .tns-nav {
+      margin-top: 40px;
+    }
+  }
+
+  .honorRollItemTitle {
+    width: calc(100% - 84px);
+  }
+
+  .honorRollPhotoFrame {
+    width: 84px;
+    height: calc(96 / 84 * 84px);
+
+    &::before {
+      width: width('home/honorRoll_mask.svg');
+      height: height('home/honorRoll_mask.svg');
+    }
+  }
+}
+
+@screen t {
+  .honorRoll {
+    &::before {
+      top: 30px;
+      left: 5px;
+      width: 70px;
+      height: calcfun(height('home/honorRoll_text.svg') / width('home/honorRoll_text.svg') * 70px);
+    }
+
+    &::after {
+      top: -20px;
+      right: 0;
+      width: 75px;
+      height: calcfun(height('home/honorRoll_fujen.svg') / width('home/honorRoll_fujen.svg') * 75px);
+    }
+
+    .tns-nav {
+      margin-top: 30px;
+    }
+  }
+
+  .honorRollItemTitle {
+    width: calc(100% - 60px);
+  }
+
+  .honorRollPhotoFrame {
+    width: 60px;
+    height: calc(96 / 84 * 60px);
+
+    &::before {
+      width: 64px;
+      height: calcfun(height('home/honorRoll_mask.svg') / width('home/honorRoll_mask.svg') * 64px);
+    }
+  }
+}
+
+@screen m {
+  .honorRoll {
+    &::before {
+      top: 28px;
+      left: 12px;
+      width: 54px;
+      height: calcfun(height('home/honorRoll_text.svg') / width('home/honorRoll_text.svg') * 54px);
+    }
+
+    &::after {
+      top: -15px;
+      right: 0;
+      width: 60px;
+      height: calcfun(height('home/honorRoll_fujen.svg') / width('home/honorRoll_fujen.svg') * 60px);
+    }
+
+    .tns-nav {
+      margin-top: 20px;
+    }
+  }
+
+  .honorRollItemTitle {
+    width: calc(100% - 34px);
+  }
+
+  .honorRollPhotoFrame {
+    width: 34px;
+    height: calc(96 / 84 * 34px);
+
+    &::before {
+      width: 38px;
+      height: calcfun(height('home/honorRoll_mask.svg') / width('home/honorRoll_mask.svg') * 38px);
+    }
+  }
+}

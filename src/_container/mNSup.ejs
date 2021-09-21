@@ -1,0 +1,58 @@
+<div class="lNSup">
+  <div class="mNSup">
+    <div class="mNSupHd">
+      <p class="mNSupTit"><b>很抱歉，您目前使用的瀏覽器無法支援瀏覽。</b></p>
+      <p class="mNSupDesc">建議您提升瀏覽器使用版本為 <%= ieVersion %> (含) 以上，或使用其他瀏覽器軟體 Google Chrome、Firefox 以獲得最佳瀏覽體驗，謝謝您的配合。
+      </p>
+    </div>
+    <div class="mNSupBd">
+      <div class="mNSupMsg">
+        <p class="mNSupMsgTit"><b>相關說明</b></p>
+        <div class="mNSupItm">
+          <p class="mNSupItmTit"><b>我如果不升級對於瀏覽上會有什麼影響？</b></p>
+          <p class="mNSupItmCnt">使用 <%= ieVersion %> 版本下的瀏覽器瀏覽本網站，可能部分網頁的呈現會有破圖或版面跑版的情況，某些網頁互動功能無法正確顯示與使用。
+          </p>
+        </div>
+        <div class="mNSupItm">
+          <p class="mNSupItmTit"><b>我要如何升級我的瀏覽器？</b></p>
+          <p class="mNSupItmCnt">請您點擊以下連結，下載並升級您的 IE 瀏覽器，或下載 Google Chrome、Firefox 瀏覽器。</p>
+        </div>
+      </div>
+      <%
+        const _browsers = [{
+          text: 'Microsoft Edge',
+          name: '--edge',
+          href: 'https://www.microsoft.com/zh-tw/edge?form=MA13DG&ocid=SMCIEDownload10-Download'
+        }, {
+          text: 'Google Chrome',
+          name: '--chrome',
+          href: 'https://www.google.com.tw/chrome/browser/desktop/'
+        }, {
+          text: 'Mozilla Firefox',
+          name: '--firefox',
+          href: 'https://www.mozilla.org/zh-TW/firefox/new/'
+        }];
+      -%>
+        <div class="mNSupFigList">
+          <ul>
+            <% for(let i = 0; i < _browsers.length; i += 1) { -%>
+              <% const { href, text, name } = _browsers[i]; -%>
+              <li>
+                <a href="<%= href %>" class="mNSupFig <%= name %>">
+                  <p class="mNSupDesc">
+                    <%= text %>
+                  </p>
+                </a>
+              </li>
+            <% } -%>
+          </ul>
+        </div>
+    </div>
+    <div class="mNSupFt">
+      <div class="mNSupCor">
+        <p class="mNSupInf"><%= cRight %></p>
+        <p class="mNSupBrs"><%= ieVersion %>+, Chrome, Safari, Firefox</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+.mMenuHd {
+  letter-spacing: 6px;
+}
+
+@screen p {
+  .mMenu {
+    width: 480px;
+  }
+}
+
+@screen t {
+  .mMenu {
+    width: 270px;
+  }
+}
+
+/* @screen m {
+
+} */

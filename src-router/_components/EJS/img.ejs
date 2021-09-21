@@ -1,0 +1,71 @@
+<%
+  const crypto = require('crypto');
+  const newPath = {
+    p: typeof path === 'object' ? path.p : path,
+    m: typeof path === 'object'
+          ? typeof path.m !== 'undefined'
+              ? path.m
+              : null
+          : /(\?|\&)(mobile)(\&|$)/.test(path)
+              ? path
+              : null
+  };
+  const hash = length => {
+    const btoa = crypto.createHash('md5').update((+new Date() + '')).digest('hex');
+    return btoa.split('').reverse().slice(0, length).join('');
+  };
+  const img = {
+        p : {
+            path: /.*(?=\?.*$)/.test(newPath.p) ? /.*(?=\?.*$)/.exec(newPath.p)[0] : newPath.p,
+            webpPath: newPath.p ? /^.*(?=\.)/.exec(newPath.p)[0] : null,
+            webp: newPath.p ? /(\?|\&)(webp)(\&|$)/.test(newPath.p) : null
+        },
+        m : {
+            path: newPath.m
+                  ? /(\?|\&)(mobile)(\&|$)/.test(newPath.m)
+                    ? newPath.m
+                      ? /.*(?=\?.*$)/.exec(newPath.m)[0].replace(/\./, '_m.')
+                      : null
+                    : newPath.m
+                      ? /.*(?=\?.*$)/.exec(newPath.m)[0]
+                      : null
+                  : null,
+            webpPath: newPath.m
+                      ? /(\?|\&)(mobile)(\&|$)/.test(newPath.m)
+                          ? newPath.m
+                            ? (/^.*(?=\.)/.exec(newPath.m)[0] + '_m')
+                            : null
+                          : newPath.m
+                            ? /^.*(?=\.)/.exec(newPath.m)[0]
+                            : null
+                      : null,
+            webp: newPath.m
+                  ? newPath.m
+                    ? /(\?|\&)(webp|mobile)\&(webp|mobile)$/.test(newPath.m)
+                    : null
+                  : newPath.m
+                    ? /\?webp$/.test(newPath.m)
+                    : null
+                    
+        }
+    };
+-%>
+<figure<%- typeof style !== 'undefined' && style.main !== 'undefined' ? ` class="${ style.main }"` : '' %>>
+  <%  %>
+  <% if ( img.m.path || img.p.webp || img.m.webp ) { -%>
+    <picture>
+      <% if ( img.m.webp ) { -%>
+        <source data-srcset="<%= img.m.webpPath %>.webp?<%= hash(8) %>" type="image/webp" media="(max-width: 428px)">
+      <% } -%>
+      <% if ( img.m.path ) { -%>
+        <source data-srcset="<%= img.m.path %>" media="(max-width: 428px)">
+      <% } -%>
+      <% if ( img.p.webp ) { -%>
+        <source data-srcset="<%= img.p.webpPath %>.webp?<%= hash(8) %>" type="image/webp">
+      <% } -%>
+    <% } -%>
+        <img src="<%= require('common/lazyload.png') %>" data-src="<%= img.p.path %>" class="<%- typeof style !== 'undefined' && typeof style.img !== 'undefined' ? `${style.img} ` : '' %>lazy" alt="<%- alt %> | 台灣人壽 TaiwanLife 公平交易平台" width="100%" height="100%">
+    <% if ( img.m.path || img.p.webp || img.m.webp ) { -%>
+      </picture>
+    <% } -%>
+</figure>

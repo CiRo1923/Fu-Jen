@@ -1,0 +1,24 @@
+.lWrap {
+  @apply min-h-screen flex flex-col flex-grow relative;
+}
+
+.lM {
+  @apply max-w-full flex-grow overflow-hidden;
+}
+
+.lFt,
+.lHd {
+  @apply w-full flex-shrink-0 relative;
+}
+
+@screen p {
+  .lHd {
+    height: 120px;
+  }
+}
+
+@screen t {
+  .lHd {
+    height: 86px;
+  }
+}

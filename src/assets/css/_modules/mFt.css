@@ -1,0 +1,133 @@
+.mFt {
+  &::before {
+    content: "";
+    background: url(common/footer_background.svg) no-repeat center center;
+    background-size: 100% auto;
+    z-index: -1;
+
+    @apply pointer-events-none absolute;
+  }
+}
+
+.mFtSocialLink {
+  width: 40px;
+  height: 40px;
+}
+
+@screen p {
+  .mFt {
+    max-width: 1170px;
+
+    &::before {
+      bottom: 190px;
+      width: 420px;
+      height: calcfun(height('common/footer_background.svg') / width('common/footer_background.svg') * 420px);
+    }
+  }
+
+  .mFtLogo {
+    width: 284px;
+    height: 60px;
+  }
+}
+
+@screen pt {
+  .mFt {
+    &::before {
+      @apply right-0;
+    }
+  }
+}
+
+@screen t {
+  .mFt {
+    &::before {
+      bottom: 100px;
+      width: 320px;
+      height: calcfun(height('common/footer_background.svg') / width('common/footer_background.svg') * 320px);
+    }
+  }
+
+  .mFtLogo {
+    width: 276px;
+    height: calc(60 / 284 * 276px);
+  }
+}
+
+@screen m {
+  .mFt {
+    &::before {
+      top: 12px;
+      right: -110px;
+      width: 300px;
+      height: calcfun(height('common/footer_background.svg') / width('common/footer_background.svg') * 300px);
+    }
+  }
+
+  .mFtLinksItemBd {
+    width: 200%;
+    transition: max-height 0.3s;
+
+    > * {
+      background-color: rgba(#fff, 0.25);
+    }
+  }
+
+  .mFtLinksItem {
+    &:nth-child(2n) {
+      .mFtLinksItemBd {
+        margin-left: -100%;
+      }
+    }
+
+    .mFtLinksItemCtrl {
+      &::after {
+        margin-left: 5px;
+
+        @apply text-xf block text-20;
+      }
+    }
+
+    .mFtLinksIconFrame {
+      width: 10px;
+      height: 10px;
+    }
+
+    .mFtLinksIcon {
+      transition: opacity 0.3s;
+    }
+
+    &:not(.act) {
+      .mFtLinksIcon {
+        &.--minus {
+          opacity: 0;
+        }
+      }
+
+      .mFtLinksItemBd {
+        max-height: 0;
+      }
+    }
+
+    &.act {
+      .mFtLinksIcon {
+        &.--plus {
+          opacity: 0;
+        }
+      }
+
+      .mFtLinksItemBd {
+        max-height: 300px;
+
+        &.--delay {
+          transition-delay: 0.2s;
+        }
+      }
+    }
+  }
+
+  .mFtLogo {
+    width: 270px;
+    height: calc(60 / 284 * 270px);
+  }
+}

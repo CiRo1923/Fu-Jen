@@ -1,0 +1,45 @@
+.mBreadCrumbsItem {
+  &:not(:last-child) {
+    &::after {
+      content: ">";
+
+      @apply block;
+    }
+  }
+
+  &:last-child {
+    @apply border-1 border-x1479 text-x1479 rounded-10;
+  }
+}
+
+@screen p {
+  .mBreadCrumbsItem {
+    &:not(:last-child) {
+      margin-right: 10px;
+
+      &::after {
+        margin-left: 10px;
+      }
+    }
+
+    &:last-child {
+      padding: 2px 12px;
+    }
+  }
+}
+
+@screen t {
+  .mBreadCrumbsItem {
+    &:not(:last-child) {
+      margin-right: 8px;
+
+      &::after {
+        margin-left: 8px;
+      }
+    }
+
+    &:last-child {
+      padding: 2px 10px;
+    }
+  }
+}

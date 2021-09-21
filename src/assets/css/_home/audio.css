@@ -1,0 +1,68 @@
+.audioItem {
+  transition: transform 0.3s;
+}
+
+.audioFig {
+  &::before {
+    z-index: 1;
+
+    @apply bg-xf00;
+  }
+
+  &::after {
+    border-color: transparent transparent transparent #fff;
+    z-index: 2;
+
+    @apply w-0 h-0 border-solid;
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    transform: translate(-50%, -50%);
+
+    @apply top-1/2 left-1/2 absolute;
+  }
+}
+
+@screen p {
+  .audioItem {
+    &:not(:hover) {
+      transform: translateY(85%);
+    }
+  }
+
+  .audioFig {
+    width: 270px;
+    height: calc(9 / 16 * 270px);
+
+    &::before {
+      width: 60px;
+      height: 40px;
+
+      @apply rounded-10;
+    }
+
+    &::after {
+      border-width: 9px 0 9px 15px;
+    }
+  }
+}
+
+@screen t {
+  .audioFig {
+    width: 130px;
+    height: calc(9 / 16 * 130px);
+
+    &::before {
+      width: 34px;
+      height: calc(40 / 60 * 34px);
+
+      @apply rounded-6;
+    }
+
+    &::after {
+      border-width: 4px 0 4px 10px;
+    }
+  }
+}

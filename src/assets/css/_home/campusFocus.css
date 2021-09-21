@@ -1,0 +1,51 @@
+.campusFocusData {
+  > a {
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+
+    @apply overflow-hidden;
+  }
+}
+
+.campusFocusFig {
+  img {
+    transform: translate(-50%, -50%);
+
+    @apply max-w-none h-full;
+  }
+}
+
+@screen p {
+  .campusFocusData {
+    width: calc(100% - 150px);
+  }
+
+  .campusFocusPhotoFrame {
+    width: 150px;
+    height: 110px;
+  }
+}
+
+@screen pt {
+  .campusFocusData {
+    > a {
+      -webkit-line-clamp: 2;
+    }
+  }
+}
+
+@screen tm {
+  .campusFocusData {
+    width: calc(100% - 48px);
+
+    > a {
+      -webkit-line-clamp: 1;
+    }
+  }
+
+  .campusFocusPhotoFrame {
+    width: 48px;
+    height: calc(110 / 150 * 48px);
+  }
+}

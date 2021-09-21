@@ -1,0 +1,49 @@
+.mTitle {
+  &.--badge {
+    @apply flex items-center;
+
+    &::before {
+      content: "";
+      background: url(article/badge_line.svg) no-repeat center center;
+      background-size: 100% auto;
+
+      @apply block;
+    }
+  }
+}
+
+@screen p {
+  .mTitle {
+    &.--badge {
+      &::before {
+        margin-right: 12px;
+        width: calcfun(width('article/badge_line.svg') / height('article/badge_line.svg') * 28);
+        height: 28px;
+      }
+    }
+  }
+}
+
+@screen t {
+  .mTitle {
+    &.--badge {
+      &::before {
+        margin-right: 8px;
+        width: calcfun(width('article/badge_line.svg') / height('article/badge_line.svg') * 24);
+        height: 24px;
+      }
+    }
+  }
+}
+
+@screen m {
+  .mTitle {
+    &.--badge {
+      &::before {
+        margin-right: 6px;
+        width: calcfun(width('article/badge_line.svg') / height('article/badge_line.svg') * 20);
+        height: 20px;
+      }
+    }
+  }
+}

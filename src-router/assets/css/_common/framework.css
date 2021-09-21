@@ -1,0 +1,69 @@
+
+@layer base {
+  html,
+  body {
+    @apply font-body leading-default;
+  }
+
+  body {
+    @apply flex flex-col min-h-screen;
+  }
+
+  * {
+    max-height: 999999px;
+  }
+
+  a,
+  button,
+  input,
+  textarea {
+    outline: none;
+  }
+
+  button {
+    &[type] {
+      &:not(.hidden) {
+        @apply overflow-visible;
+      }
+    }
+  }
+
+  @screen pMax {
+    html,
+    body {
+      @apply text-16;
+    }
+  }
+
+  /* @screen pt {} */
+
+  @screen pMin {
+    html,
+    body {
+      @apply text-vmp;
+    }
+  }
+
+  @screen t {
+    html,
+    body {
+      @apply text-vmt;
+    }
+  }
+
+  @screen m {
+    html,
+    body {
+      @apply text-vmm;
+    }
+  }
+
+  @screen mLandscape {
+    html,
+    body {
+      @apply text-vmmls;
+    }
+  }
+}
+
+/* @layer components {} */

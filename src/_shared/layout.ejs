@@ -1,0 +1,69 @@
+<%
+  const TITLENAME = 'MAP 預約顧問 - 人生藍圖畫起來 | 全球人壽 Transglobe';
+  const TITLE = htmlWebpackPlugin.options.title !== 'Webpack App' ? htmlWebpackPlugin.options.title : 'MAP 預約顧問 - 人生藍圖畫起來 | 全球人壽 Transglobe';
+  const COPYRIGHT = '2021 ©本網站版權屬 全球人壽保險股份有限公司所有';
+  const reqFile = require(`../views/${htmlWebpackPlugin.options.includeName}`)({
+    htmlWebpackPlugin : htmlWebpackPlugin
+  });
+-%>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="timestamp">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE">
+    <meta property="og:title" content="<%- TITLE %>">
+    <meta property="og:description" name="description" content="<%- htmlWebpackPlugin.options.description ? htmlWebpackPlugin.options.description : '' %>">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="<%- TITLE %>">
+    <title><%- TITLE %></title>
+    <link rel="shortcut icon" type="image/x-icon" href="static/img/favicon.ico">
+    <link rel="canonical" href="">
+  </head>
+  <body class="bg-xf text-x133a">
+    <input type="hidden" name="isHome" value="<%- typeof htmlWebpackPlugin.options.headerID !== 'undefined' ? true : false %>">
+    <input type="hidden" name="language" value="zhTW-中文版, enUS-EN">
+    <input type="hidden" name="functionCode" value="[{'id': 'CampusFocus', 'chineseName': '校園焦點', 'englishName': 'Campus Focus'}, {'id': 'LatestNews', 'chineseName': '最新動態', 'englishName': 'Latest News'}, {'id': 'HonorRoll', 'chineseName': '榮譽榜', 'englishName': 'Honor Roll'}, {'id': 'Audiovisual', 'chineseName': '影音', 'englishName': 'Audio Visual'}]">
+    <input type="hidden" name="listName" value="{'chineseName': '所有列表', 'englishName': 'All lists'}">
+    <input type="hidden" name="importantName" value="{'chineseName': '重要連結與公告', 'englishName': 'Important links and announcements'}">
+    <input type="hidden" name="listPath" value="List/">
+    <input type="hidden" name="articlePath" value="Article/">
+    <div class="lWrap">
+      <div class="lHd flex-shrink-0" id="header">
+      </div>
+      <main class="lMain flex-grow relative">
+        <a
+          href="#C"
+          title="中央內容區塊"
+          accesskey="C"
+          name="C"
+          class="assetsKey top-0 left-0 absolute"
+        >:::</a>
+        <noscript>
+          <p>親愛的網友您好！</p>
+          <strong>您必須啟用 Javascript，才能使用「天主教輔仁大學」的完整功能。不過，Javascript 似乎已停用或不受您的瀏覽器支援。請變更瀏覽器的選項，啟用 Javascript，然後<a href="./">再試一次</a>。</strong>
+          <p>天主教輔仁大學關心您！</p>
+        </noscript>
+        <%- reqFile %>
+      </main>
+      <div class="lFt bg-x1479 flex-shrink-0" id="footer"></div>
+    </div>
+    
+    <%- require('container/mNSup.ejs')({
+      cRight: COPYRIGHT,
+      ieVersion: process.env.IE_VERSION
+    }) %>
+  </body>
+</html>
