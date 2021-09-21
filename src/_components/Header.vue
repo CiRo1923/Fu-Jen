@@ -1,7 +1,7 @@
 <script>
 import Svg from './Svg.vue';
 import Nav from './Nav.vue';
-import { actionURL } from '../scripts/_factory.js';
+import { language, actionURL } from '../scripts/_factory.js';
 import { inject } from 'vue';
 
 export default {
@@ -19,6 +19,7 @@ export default {
   data() {
     return {
       isHome: (document.querySelector('[name="isHome"]').value === 'true'),
+      language: language(),
       actionURL: actionURL
     };
   },
@@ -94,15 +95,31 @@ export default {
         <div v-if="isHome">
           <div class="mHdLogoFrame p:mx-auto p:mb-84">
             <m-svg
+              v-if="!/en/.test(language)"
               class="tm:hidden w-full h-full"
               :class="changeColor(info.logoClass)"
               svg-icon="logo_large"
               alt="天主教輔仁大學 FUJEN CATHOLIC UNIVERSITY"
             />
             <m-svg
+              v-else
+              class="tm:hidden w-full h-full"
+              :class="changeColor(info.logoClass)"
+              svg-icon="logo_large_en"
+              alt="天主教輔仁大學 FUJEN CATHOLIC UNIVERSITY"
+            />
+            <m-svg
+              v-if="!/en/.test(language)"
               class="w-full h-full p:hidden m:hidden"
               :class="changeColor(info.logoClass)"
               svg-icon="logo"
+              alt="天主教輔仁大學 FUJEN CATHOLIC UNIVERSITY:回首頁"
+            />
+            <m-svg
+              v-else
+              class="w-full h-full p:hidden m:hidden"
+              :class="changeColor(info.logoClass)"
+              svg-icon="logo_en"
               alt="天主教輔仁大學 FUJEN CATHOLIC UNIVERSITY:回首頁"
             />
             <m-svg
@@ -131,8 +148,15 @@ export default {
         >
           <div class="mHdLogoFrame">
             <m-svg
+              v-if="!/en/.test(language)"
               class="w-full h-full p:mx-auto p:fill-x1479 t:fill-xf m:hidden"
               svg-icon="logo"
+              alt="天主教輔仁大學 FUJEN CATHOLIC UNIVERSITY:回首頁"
+            />
+            <m-svg
+              v-else
+              class="w-full h-full p:mx-auto p:fill-x1479 t:fill-xf m:hidden"
+              svg-icon="logo_en"
               alt="天主教輔仁大學 FUJEN CATHOLIC UNIVERSITY:回首頁"
             />
             <m-svg

@@ -116,7 +116,7 @@ export default {
           <div class="mFtLinksItemHd p:mb-24 t:mb-12">
             <button
               type="button"
-              class="mFtLinksItemCtrl text-xf pt:block m:w-full m:flex m:items-center m:justify-center m:text-center"
+              class="mFtLinksItemCtrl text-xf pt:block pt:text-left m:w-full m:flex m:items-center m:justify-center m:text-center"
               :title="(/en/.test(language) ? item.englishName : item.chineseName)"
               @click="clickLinks(index)"
             >

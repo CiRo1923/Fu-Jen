@@ -477,6 +477,7 @@ export default {
               pt:rounded-12
               t:px-10 t:py-3 t:text-16
               m:px-4 m:py-1 m:text-12 m:rounded-8"
+              :title="more"
             >
               <b>more</b>
             </a>

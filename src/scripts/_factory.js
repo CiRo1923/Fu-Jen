@@ -133,7 +133,7 @@ export const actionURL = (page, param) => {
   let query = null;
 
   if (page === 'index') {
-    newPath = /en/.test(language()) ? `${rootPath}/${language()}` : '/';
+    newPath = /en/.test(language()) ? `${rootPath}/${userRoute}/${language()}` : '/';
     query = newPath;
   } else {
     for (let i = 0; i < param.length; i += 1) {
@@ -147,9 +147,16 @@ export const actionURL = (page, param) => {
           newPath = `${rootPath}/${paramValue}/${language()}/${page || ''}`;
           query = newPath;
         } else if (paramName === 'language') {
-          const lang = new RegExp(language()).test(window.location.pathname)
-            ? `${window.location.pathname.replace(language(), paramValue)}`
-            : `${rootPath}/${userRoute}/${paramValue}/${page || ''}`;
+          let lang = null;
+
+          if (/en.*\/?$/.test(window.location.pathname)) {
+            lang = '/';
+          } else if (new RegExp(language()).test(window.location.pathname)) {
+            lang = window.location.pathname.replace(language(), paramValue);
+          } else {
+            lang = `${rootPath}/${userRoute}/${paramValue}/${page || ''}`;
+          }
+
           query = lang;
         } else if (paramName === 'functionCode') {
           // const funCode = new RegExp(paramValue).test(window.location.pathname)
