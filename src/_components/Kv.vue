@@ -2,7 +2,7 @@
 import { apiPpagepictures } from '../scripts/_axios.js';
 import mSlider from './_modules/mSlider.vue';
 import Svg from './Svg.vue';
-import { language } from '../scripts/_factory.js';
+import { language, path, getImageSrc } from '../scripts/_factory.js';
 
 export default {
   components: {
@@ -12,6 +12,7 @@ export default {
   data() {
     return {
       language: language(),
+      imgPath: path('apiPath'),
       items: []
     };
   },
@@ -43,7 +44,7 @@ export default {
       let src = '/static/img/banner.jpg';
 
       if (process.env.APP_ENV !== 'dev') {
-        src = /en/.test(vm.language) ? data.englishFilePath : data.chineseFilePath;
+        src = /en/.test(vm.language) ? getImageSrc(data.englishFilePath) : getImageSrc(data.chineseFilePath);
       }
 
       return src;

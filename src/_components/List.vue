@@ -1,7 +1,7 @@
 <script>
 import { apiArticles } from '../scripts/_axios.js';
 import {
-  language, params, getFunctionCadeData, path, actionURL, dateReturn, getYoutubeImage, listAllName
+  language, params, getFunctionCadeData, path, actionURL, dateReturn, getYoutubeImage, listAllName, getImageSrc
 } from '../scripts/_factory.js';
 import mTitle from './_modules/mTitle.vue';
 import BreadCrumbs from './BreadCrumbs.vue';
@@ -26,6 +26,7 @@ export default {
       getYoutubeImage: getYoutubeImage,
       params: params,
       listPath: path('listPath'),
+      imgPath: path('apiPath'),
       articlePath: path('articlePath'),
       list: null,
       listCategoryName: {
@@ -74,9 +75,9 @@ export default {
       let src = null;
 
       if (/en/.test(vm.language) && item.englishPicturePath) {
-        src = item.englishPicturePath;
+        src = getImageSrc(item.englishPicturePath);
       } else if (/tw/.test(vm.language) && item.chinesePicturePath) {
-        src = item.chinesePicturePath;
+        src = getImageSrc(item.chinesePicturePath);
       }
 
       return src;

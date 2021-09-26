@@ -28,12 +28,12 @@ module.exports = {
   imgs: 'assets/img/',
   svg: '_svg/',
   fonts: null,
-  proxy: {
+  proxy: process.env.NODE_ENV === 'development' ? {
     '/**': {
       target: 'http://api.ideakeys.com',
       changeOrigin: true
     }
-  },
+  } : null,
   plugins: () => {
     const def = [];
     let publish = def.concat(

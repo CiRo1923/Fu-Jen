@@ -1,4 +1,5 @@
 <script>
+import { path, getImageSrc } from '../scripts/_factory.js';
 
 export default {
   props: {
@@ -7,13 +8,18 @@ export default {
       default: () => {}
     }
   },
+  data() {
+    return {
+      imgPath: path('apiPath')
+    };
+  },
   computed: {
     bannerImg() {
       const vm = this;
       let src = '/static/img/banner.jpg';
 
       if (process.env.APP_ENV !== 'dev') {
-        src = vm.datas.data.menuPage.menuPageBannerPath;
+        src = getImageSrc(vm.datas.data.menuPage.menuPageBannerPath);
       }
 
       return src;

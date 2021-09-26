@@ -197,3 +197,20 @@ export const getYoutubeImage = (item) => {
 
   return coverPath;
 };
+
+export const getImageSrc = (src) => {
+  let imgPath = null;
+  const apiPath = path('apiPath');
+
+  if (src) {
+    if (/^www\./.test(src)) {
+      imgPath = `http://${src}`;
+    } else if (/^\/uploads/.test(src.toLowerCase())) {
+      imgPath = `${apiPath}${src}`;
+    } else {
+      imgPath = src;
+    }
+  }
+
+  return imgPath;
+};

@@ -1,7 +1,11 @@
 import axios from 'axios';
+import { path } from './_factory.js';
 
 const apiRequest = axios.create({
-  baseURL: '/web/'
+  baseURL: process.env.NODE_ENV === 'development' ? '/web/' : `${path('apiPath')}/web/`,
+  headers: {
+    'Access-Control-Allow-Origin': '*'
+  }
 });
 
 // common

@@ -1,7 +1,7 @@
 const { setData, setOpacity } = require('./tailwind.function.js');
 const CONFIG = require('./config.js');
 const {
-  fontFamily, lineHeight, spacing, negative, colors, borderRadius, fontSize
+  fontFamily, lineHeight, spacing, negative, colors, borderRadius, zIndex, fontSize
 } = require('./tailwind.setting.js');
 
 const defaultSpacing = {
@@ -60,7 +60,8 @@ module.exports = {
           extractor: content => content.match(/[$%\w.:\-/(,)]+(?<!\()/g) || [],
           extensions: ['ejs']
         }
-      ]
+      ],
+      safelist: [/^:/]
     }
   },
   theme: {
@@ -74,17 +75,18 @@ module.exports = {
           : '\\0screen\\, screen\\9, all and (min-width: 0\\0) and (min-resolution: 0.001dpcm)'
       }],
       mLandscape: [{
-        raw: `(max-width: ${CONFIG.mobileMaxWidth - 1}px) and (orientation: landscape) and (min-width: 480px)
-        , (max-width: 999px) and (max-height: 428px) and (orientation: landscape) and (orientation: landscape) and (min-width: 480px)`
+        raw: `(max-width: ${CONFIG.mobileMaxWidth - 1}px) and (orientation: landscape) and (min-width: 480px),
+        (max-width: 999px) and (max-height: 428px) and (orientation: landscape) and (orientation: landscape) and (min-width: 480px)`
       }],
       m: [{
         raw: `(max-width: 1000px) and (max-height: 428px) and (orientation: landscape), (max-width: ${CONFIG.mobileMaxWidth - 1}px)`
       }],
       t: [{
-        raw: `(min-width: ${CONFIG.mobileMaxWidth}px) and (max-width: 1001px) and (min-height: 428px)`
+        raw: `(min-width: ${CONFIG.mobileMaxWidth}px) and (max-width: 1001px) and (min-height: 428px),
+        (min-width: 1024px) and (max-height: 1366px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1.5)`
       }],
       tm: [{
-        max: '1001px'
+        raw: '(max-width: 1001px), (min-width: 1024px) and (max-height: 1366px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1.5)'
       }],
       pt: [{
         raw: `(min-width: ${CONFIG.mobileMaxWidth}px) and (min-height: 428px)`
@@ -94,10 +96,13 @@ module.exports = {
         max: `${CONFIG.desktopMinWidth}px`
       }],
       p: [{
-        min: '1001px'
+        raw: '(min-width: 1023px) and (orientation: landscape)'
       }],
       pMax: [{
         min: `${CONFIG.desktopMinWidth + 1}px`
+      }],
+      IE: [{
+        raw: 'screen and (-ms-high-contrast:active), (-ms-high-contrast:none)'
       }]
     },
     extend: {
@@ -157,6 +162,9 @@ module.exports = {
       },
       opacity: {
         ...defaultOpacity
+      },
+      zIndex: {
+        ...zIndex
       }
     },
     fill: theme => ({
@@ -169,5 +177,32 @@ module.exports = {
     })
   },
   variants: {},
-  plugins: []
+  corePlugins: {
+    space: false
+  },
+  plugins: [
+    ({
+      addUtilities, theme, e, variants
+    }) => {
+      const spaceX = Object.fromEntries(
+        Object.entries(theme('space')).map(([k, v]) => [
+          `.${e(`space-x-${k}`)} > * + *`,
+          { marginLeft: v }
+        ])
+      );
+      const spaceY = Object.fromEntries(
+        Object.entries(theme('space')).map(([k, v]) => [
+          `.${e(`space-y-${k}`)} > * + *`,
+          { marginTop: v }
+        ])
+      );
+      addUtilities(
+        {
+          ...spaceX,
+          ...spaceY
+        },
+        variants('space')
+      );
+    }
+  ]
 };

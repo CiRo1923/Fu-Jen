@@ -18,7 +18,7 @@ export default {
   },
   data() {
     return {
-      isHome: (document.querySelector('[name="isHome"]').value === 'true'),
+      isHome: !!document.querySelector('#home'),
       language: language(),
       actionURL: actionURL
     };

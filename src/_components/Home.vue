@@ -3,7 +3,7 @@ import Svg from './Svg.vue';
 import mSlider from './_modules/mSlider.vue';
 import { apiArticles } from '../scripts/_axios.js';
 import {
-  language, path, actionURL, getFunctionCadeData, getYoutubeImage, dateReturn, device, importantName
+  language, path, actionURL, getFunctionCadeData, getYoutubeImage, dateReturn, device, importantName, getImageSrc
 } from '../scripts/_factory.js';
 
 export default {
@@ -26,6 +26,7 @@ export default {
       links: [],
       report: [],
       reportName: null,
+      reportMore: null,
       video: null,
       honorRoll: []
     };
@@ -97,7 +98,7 @@ export default {
       vm.latestNews = [];
       apiData(latestNewsData, vm.latestNews, (device() === 'P' ? 5 : 3), {
         FunctionCode: 'LatestNews',
-        ExcludeCategoryString: 22,
+        ExcludeCategoryString: '快訊',
         Size: 15
       });
 
@@ -105,7 +106,7 @@ export default {
       vm.campusFocus = [];
       apiData(campusFocusData, vm.campusFocus, 3, {
         FunctionCode: 'CampusFocus',
-        ExcludeCategoryString: 10,
+        ExcludeCategoryString: '專輯報導',
         Size: 9
       });
 
@@ -125,7 +126,9 @@ export default {
         IsWithContent: 1,
         Size: 1
       }, (data) => {
-        vm.reportName = /en/.test(vm.language) ? data.items[0].categoryEnglishName : data.items[0].categoryName;
+        const items = data.items;
+        vm.reportName = /en/.test(vm.language) ? items[0].categoryEnglishName : items[0].categoryName;
+        vm.reportMore = actionURL(vm.articlePath, ['CampusFocus', (items[0].categoryId + ''), (items[0].articleId + '')]);
       });
 
       // 取得 影音專區
@@ -141,6 +144,12 @@ export default {
             console.log(data);
 
             vm.video = items;
+
+            for (let i = 0; i < vm.video.length; i += 1) {
+              const { categoryId, articleId } = vm.video[i];
+
+              vm.video[i].linksURL = actionURL(vm.articlePath, ['Audiovisual', (categoryId + ''), (articleId + '')]);
+            }
           }
         });
       }
@@ -182,7 +191,7 @@ export default {
       let src = 'https://img.ltn.com.tw/Upload/sports/page/800/2021/04/20/phpoVHhNe.jpg';
 
       if (process.env.APP_ENV !== 'dev') {
-        src = /en/.test(vm.language) ? item.englishPicturePath : item.chinesePicturePath;
+        src = /en/.test(vm.language) ? getImageSrc(item.englishPicturePath) : getImageSrc(item.chinesePicturePath);
       }
 
       return src;
@@ -192,7 +201,7 @@ export default {
       let src = 'https://www.fju.edu.tw/showImg/focus/focus1750.jpg';
 
       if (process.env.APP_ENV !== 'dev') {
-        src = /en/.test(vm.language) ? item.englishPicturePath : item.chinesePicturePath;
+        src = /en/.test(vm.language) ? getImageSrc(item.englishPicturePath) : getImageSrc(item.chinesePicturePath);
       }
 
       return src;
@@ -399,16 +408,10 @@ export default {
             </div>
           </section>
           <figure class="w-1/2">
-            <picture>
-              <source
-                srcset="/assets/img/home/links.webp"
-                type="image/webp"
-              >
-              <img
-                src="~home/links.jpg"
-                :alt="(/en/.test(language) ? importantName.englishName : importantName.chineseName)"
-              >
-            </picture>
+            <img
+              src="~home/links.jpg"
+              :alt="(/en/.test(language) ? importantName.englishName : importantName.chineseName)"
+            >
           </figure>
         </div>
         <div class="flex flex-row-reverse">
@@ -442,18 +445,20 @@ export default {
                 </template>
               </m-slider>
             </div>
+            <footer class="sectionFt right-0 bottom-0 absolute p:mb-16 p:mr-20 tm:mb-8 tm:mr-12">
+              <a
+                :href="reportMore"
+                class="text-xf border-1 border-xf rounded-8 inline-block p:px-12 p:py-3 p:text-15 tm:px-4 tm:py-1 tm:text-12"
+              >
+                <b>more</b>
+              </a>
+            </footer>
           </section>
           <figure class="w-1/2">
-            <picture>
-              <source
-                srcset="/assets/img/home/report.webp"
-                type="image/webp"
-              >
-              <img
-                src="~home/report.jpg"
-                :alt="getFunCode('CampusFocus')"
-              >
-            </picture>
+            <img
+              src="~home/report.jpg"
+              :alt="getFunCode('CampusFocus')"
+            >
           </figure>
         </div>
       </div>
@@ -493,11 +498,9 @@ export default {
               t:mx-10"
             >
               <a
-                :href="(/en/.test(language) ? item.englishVideoURL : item.chineseVideoURL)"
+                :href="item.linksURL"
                 :title="(/en/.test(language) ? item.englishName : item.chineseName)"
                 class="block"
-                target="_blank"
-                rel="noopener"
               >
                 <figure class="audioFig relative">
                   <img
@@ -511,16 +514,10 @@ export default {
         </div>
       </div>
       <figure>
-        <picture>
-          <source
-            srcset="/assets/img/home/video_background.webp"
-            type="image/webp"
-          >
-          <img
-            src="~home/video_background.jpg"
-            alt="為追求真、善、美、聖 全人教育之師生共同體"
-          >
-        </picture>
+        <img
+          src="~home/video_background.jpg"
+          alt="為追求真、善、美、聖 全人教育之師生共同體"
+        >
       </figure>
     </div>
     <div
