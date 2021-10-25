@@ -1,7 +1,7 @@
 <script>
 import Svg from './Svg.vue';
 import Nav from './Nav.vue';
-import { language, actionURL } from '../scripts/_factory.js';
+import { language, actionURL, getImageSrc } from '../scripts/_factory.js';
 import { inject } from 'vue';
 
 export default {
@@ -66,7 +66,7 @@ export default {
       return vm.isHome ? color : 'text-x1479';
     },
     logoPath(src) {
-      return process.env.APP_ENV !== 'dev' ? src : '/static/img/home_background.png';
+      return process.env.APP_ENV !== 'dev' ? getImageSrc(src) : '/static/img/home_background.png';
     }
   }
 };

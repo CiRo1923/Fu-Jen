@@ -134,8 +134,8 @@ export default {
               v-if="(/en/.test(language) ? item.englishURL : item.chineseURL)"
               :href="(/en/.test(language) ? item.englishURL : item.chineseURL)"
               :title="(/en/.test(language) ? item.englishName : item.chineseName)"
-              :target="/en/.test(language) ? item.englishactionURLType : item.chineseactionURLType"
-              :rel="getRel((/en/.test(language) ? item.englishactionURLType : item.chineseactionURLType))"
+              :target="/en/.test(language) ? item.englishURLActionType : item.chineseURLActionType"
+              :rel="getRel((/en/.test(language) ? item.englishURLActionType : item.chineseURLActionType))"
               class="p:h-full block"
             >
               <em class="pt:text-20 m:text-18 not-italic"><strong>{{ /en/.test(language) ? item.englishName : item.chineseName }}</strong></em>
