@@ -217,7 +217,7 @@ export default {
               >
                 <a
                   class="box-border tm:text-center tm:flex tm:flex-col tm:justify-center t:px-16 t:text-15 m:px-12 m:text-13"
-                  :href="actionURL(listPath, [item.id])"
+                  :href="actionURL(listPath, [item.id, '0', '1'])"
                   :title="(/en/.test(language) ? item.englishName : item.chineseName)"
                 >{{ /en/.test(language) ? item.englishName : item.chineseName }}</a>
               </li>

@@ -47,7 +47,7 @@ export default {
     >
       <li v-if="allLists">
         <a
-          :href="actionURL(listPath, [`${funCode?.id}`])"
+          :href="actionURL(listPath, [`${funCode?.id}`, '0', '1'])"
           :class="{'text-xba79': !category, 'text-xf': category}"
           :title="(/en/.test(language) ? listAllName.englishName : listAllName.chineseName)"
         >

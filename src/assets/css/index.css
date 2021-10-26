@@ -2,6 +2,7 @@
 
 /* page */
 @import '_home/news';
+@import '_home/latestNews';
 @import '_home/campusFocus';
 @import '_home/audio';
 @import '_home/honorRoll';

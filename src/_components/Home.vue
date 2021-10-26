@@ -91,15 +91,17 @@ export default {
       vm.news = [];
       apiData(newsData, vm.news, 2, {
         CategoryId: 22,
-        FunctionCode: 'LatestNews'
+        FunctionCode: 'LatestNews',
+        OrderByType: 'SortNumber'
       });
 
       // 取得 最新動態
       vm.latestNews = [];
-      apiData(latestNewsData, vm.latestNews, (device() === 'P' ? 5 : 3), {
+      apiData(latestNewsData, vm.latestNews, (device() === 'P' ? 3 : 2), {
         FunctionCode: 'LatestNews',
         ExcludeCategoryString: '快訊',
-        Size: 15
+        Size: 15,
+        OrderByType: 'SortNumber'
       });
 
       // 取得 校園焦點
@@ -107,7 +109,8 @@ export default {
       apiData(campusFocusData, vm.campusFocus, 3, {
         FunctionCode: 'CampusFocus',
         ExcludeCategoryString: '專輯報導',
-        Size: 9
+        Size: 9,
+        OrderByType: 'SortNumber'
       });
 
       // 取得 重要連結與公告
@@ -115,7 +118,8 @@ export default {
       apiData(linksData, vm.links, 6, {
         CategoryId: 4,
         FunctionCode: 'Link',
-        Size: 24
+        Size: 24,
+        OrderByType: 'SortNumber'
       });
 
       // 取得 專題報導
@@ -124,18 +128,22 @@ export default {
         CategoryId: 10,
         FunctionCode: 'CampusFocus',
         IsWithContent: 1,
-        Size: 1
+        Size: 1,
+        OrderByType: 'SortNumber'
       }, (data) => {
         const items = data.items;
-        vm.reportName = /en/.test(vm.language) ? items[0].categoryEnglishName : items[0].categoryName;
-        vm.reportMore = actionURL(vm.articlePath, ['CampusFocus', (items[0].categoryId + ''), (items[0].articleId + '')]);
+        if (items.length !== 0) {
+          vm.reportName = /en/.test(vm.language) ? items[0].categoryEnglishName : items[0].categoryName;
+          vm.reportMore = actionURL(vm.articlePath, ['CampusFocus', (items[0].categoryId + ''), (items[0].articleId + '')]);
+        }
       });
 
       // 取得 影音專區
       if (!vm.video) {
         await apiArticles({
           FunctionCode: 'Audiovisual',
-          Size: 4
+          Size: 4,
+          OrderByType: 'SortNumber'
         }).then(res => {
           const { status, data } = res;
 
@@ -159,7 +167,8 @@ export default {
       apiData(honorRollData, vm.honorRoll, 4, {
         FunctionCode: 'HonorRoll',
         IsWithContent: 1,
-        Size: 12
+        Size: 12,
+        OrderByType: 'SortNumber'
       });
     };
 
@@ -221,7 +230,10 @@ export default {
 <template>
   <div class="home">
     <div class="news overflow-hidden relative p:py-36 t:py-28 m:py-20">
-      <div class="mx-auto p:w-cnt t:w-4/6">
+      <div
+        v-if="news.length !== 0"
+        class="mx-auto p:w-cnt t:w-4/6"
+      >
         <m-slider
           :key="`news_tinySilder_${news.length}`"
           name="news"
@@ -273,17 +285,17 @@ export default {
                 :options="{items: 1, nav: true, controls: false}"
               >
                 <template #slider_content="{ data }">
-                  <ul class="p:space-y-4">
+                  <ul class="p:space-y-10">
                     <li
                       v-for="item, i in data"
                       :key="`${item.chineseName}_${i}`"
                     >
-                      <small class="text-xf block opacity-35 p:text-22 tm:text-12">
-                        {{ /en/.test(language) ? item.categoryEnglishName : item.categoryName }}
-                      </small>
+                      <time class="text-xf block opacity-35 p:text-22 tm:text-12">
+                        {{ dateReturn(item.startTime) }}
+                      </time>
                       <a
                         :href="actionURL(articlePath, ['LatestNews', item.categoryId, item.articleId])"
-                        class="text-xf block truncate p:text-22 tm:text-12"
+                        class="latestNewsLinks text-xf block p:text-22 tm:text-12"
                         :title="(/en/.test(language) ? item.englishName : item.chineseName)"
                       >
                         {{ /en/.test(language) ? item.englishName : item.chineseName }}
@@ -295,7 +307,7 @@ export default {
             </div>
             <footer class="sectionFt right-0 bottom-0 absolute p:mb-16 p:mr-20 tm:mb-8 tm:mr-12">
               <a
-                :href="actionURL(listPath, ['LatestNews'])"
+                :href="actionURL(listPath, ['LatestNews', '0', '1'])"
                 class="text-xf border-1 border-xf rounded-8 inline-block p:px-12 p:py-3 p:text-15 tm:px-4 tm:py-1 tm:text-12"
               >
                 <b>more</b>
@@ -316,7 +328,10 @@ export default {
                 <strong class="p:text-26 tm:text-15">{{ getFunCode('CampusFocus') }}</strong>
               </h2>
             </header>
-            <div class="sectionBd flex-grow">
+            <div
+              v-if="campusFocus.length !== 0"
+              class="sectionBd flex-grow"
+            >
               <m-slider
                 :key="`campusFocus_tinySilder_${campusFocus.length}`"
                 name="campusFocus"
@@ -358,7 +373,7 @@ export default {
             </div>
             <footer class="sectionFt right-0 bottom-0 absolute p:mb-16 p:mr-20 tm:mb-8 tm:mr-12">
               <a
-                :href="actionURL(listPath, ['CampusFocus'])"
+                :href="actionURL(listPath, ['CampusFocus', '0', '1'])"
                 class="text-xf border-1 border-xf rounded-8 inline-block p:px-12 p:py-3 p:text-15 tm:px-4 tm:py-1 tm:text-12"
               >
                 <b>more</b>
@@ -381,7 +396,10 @@ export default {
                 <strong class="p:text-26 tm:text-15">{{ /en/.test(language) ? importantName.englishName : importantName.chineseName }}</strong>
               </h2>
             </header>
-            <div class="sectionBd flex-grow">
+            <div
+              v-if="links.length !== 0"
+              class="sectionBd flex-grow"
+            >
               <m-slider
                 :key="`links_tinySilder_${links.length}`"
                 name="links"
@@ -421,7 +439,10 @@ export default {
                 <strong class="p:text-26 tm:text-15">{{ reportName }}</strong>
               </h2>
             </header>
-            <div class="sectionBd flex-grow">
+            <div
+              v-if="report.length !== 0"
+              class="sectionBd flex-grow"
+            >
               <m-slider
                 :key="`report_tinySilder_${report.length}`"
                 name="report"
@@ -445,7 +466,10 @@ export default {
                 </template>
               </m-slider>
             </div>
-            <footer class="sectionFt right-0 bottom-0 absolute p:mb-16 p:mr-20 tm:mb-8 tm:mr-12">
+            <footer
+              v-if="reportMore"
+              class="sectionFt right-0 bottom-0 absolute p:mb-16 p:mr-20 tm:mb-8 tm:mr-12"
+            >
               <a
                 :href="reportMore"
                 class="text-xf border-1 border-xf rounded-8 inline-block p:px-12 p:py-3 p:text-15 tm:px-4 tm:py-1 tm:text-12"
@@ -476,7 +500,7 @@ export default {
           </p>
           <div>
             <a
-              :href="actionURL(listPath, ['Audiovisual'])"
+              :href="actionURL(listPath, ['Audiovisual', '0', '1'])"
               class="text-xf border-1 border-xf inline-block
               p:px-16 p:py-5 p:text-24
               pt:rounded-12
@@ -488,7 +512,10 @@ export default {
             </a>
           </div>
         </div>
-        <div class="bottom-0 absolute m:hidden">
+        <div
+          v-if="video"
+          class="bottom-0 absolute m:hidden"
+        >
           <ul class="flex items-center">
             <li
               v-for="item, index in video"
@@ -527,6 +554,7 @@ export default {
       m:py-20"
     >
       <div
+        v-if="honorRoll.length !== 0"
         class="honorRollBd mx-auto text-left relative
         p:w-4/6
         t:w-5/6
@@ -621,7 +649,7 @@ export default {
         </m-slider>
         <div class="right-0 bottom-0 p:-mb-10 p:mr-32 absolute">
           <a
-            :href="actionURL(listPath, ['HonorRoll'])"
+            :href="actionURL(listPath, ['HonorRoll', '0', '1'])"
             class="text-x1479 border-1 border-x1479 inline-block
               p:px-16 p:py-5 p:text-24
               pt:rounded-12

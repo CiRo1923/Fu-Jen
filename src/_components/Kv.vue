@@ -59,7 +59,7 @@ export default {
       :key="`mkv${items.length}`"
       name="mkv"
       :items="items"
-      :options="{'items': 1, 'axis': 'vertical'}"
+      :options="{'items': 1, 'axis': 'vertical', 'autoplay': true}"
       class="relative"
     >
       <template #slider_content="{ data }">

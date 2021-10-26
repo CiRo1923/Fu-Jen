@@ -38,7 +38,7 @@ export default {
     </template>
     <template #menu_content="{ data }">
       <a
-        :href="actionURL(listPath, [`functionCode-${funCode?.id}`, `${categoryId}-${data.categoryId}`])"
+        :href="actionURL(listPath, [`functionCode-${funCode?.id}`, `${categoryId}-${data.categoryId}`, 'page-1'])"
         :class="{'text-xba79': category === data.categoryId, 'text-xf': category !== data.categoryId}"
         :title="(/en/.test(language) ? data.englishName : data.chineseName)"
       >

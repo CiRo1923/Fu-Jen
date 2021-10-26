@@ -26,6 +26,9 @@ export default {
     const catId = Number(vm.params('categoryId'));
     const articleId = Number(vm.params('articleId'));
 
+    console.log(catId);
+    console.log(articleId);
+
     const apiAsync = async () => {
       await apiCategories().then(res => {
         const { status, data } = res;
@@ -75,8 +78,8 @@ export default {
 
 <template>
   <m-article
-    :bread-crumbs="[`${getTitle(funCode)}-${actionURL(listPath, [funCode.id, ])}`,
-                    `${getTitle(typeName)}-${actionURL(listPath, [funCode.id, params('categoryId')])}`,
+    :bread-crumbs="[`${getTitle(funCode)}-${actionURL(listPath, [funCode.id, '0', '1'])}`,
+                    `${getTitle(typeName)}-${actionURL(listPath, [funCode.id, params('categoryId'), '1'])}`,
                     getTitle(article)]"
   >
     <template #article_header>

@@ -1,223 +1,223 @@
 module.exports = {
   HtmlWebpackPlugin: [{
-    filename: 'University/Web/zhTW/List/LatestNews/index.html',
+    filename: 'University/Web/zhTW/List/LatestNews/0/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/enUS/List/LatestNews/index.html',
+    filename: 'University/Web/enUS/List/LatestNews/0/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/zhTW/List/LatestNews/2/index.html',
+    filename: 'University/Web/zhTW/List/LatestNews/2/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/enUS/List/LatestNews/2/index.html',
+    filename: 'University/Web/enUS/List/LatestNews/2/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/zhTW/List/LatestNews/11/index.html',
+    filename: 'University/Web/zhTW/List/LatestNews/11/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/enUS/List/LatestNews/11/index.html',
+    filename: 'University/Web/enUS/List/LatestNews/11/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/zhTW/List/LatestNews/12/index.html',
+    filename: 'University/Web/zhTW/List/LatestNews/12/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/enUS/List/LatestNews/12/index.html',
+    filename: 'University/Web/enUS/List/LatestNews/12/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/zhTW/List/LatestNews/13/index.html',
+    filename: 'University/Web/zhTW/List/LatestNews/13/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/enUS/List/LatestNews/13/index.html',
+    filename: 'University/Web/enUS/List/LatestNews/13/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/zhTW/List/LatestNews/14/index.html',
+    filename: 'University/Web/zhTW/List/LatestNews/14/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/enUS/List/LatestNews/14/index.html',
+    filename: 'University/Web/enUS/List/LatestNews/14/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/zhTW/List/LatestNews/15/index.html',
+    filename: 'University/Web/zhTW/List/LatestNews/15/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/enUS/List/LatestNews/15/index.html',
+    filename: 'University/Web/enUS/List/LatestNews/15/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/zhTW/List/LatestNews/16/index.html',
+    filename: 'University/Web/zhTW/List/LatestNews/16/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/enUS/List/LatestNews/16/index.html',
+    filename: 'University/Web/enUS/List/LatestNews/16/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/zhTW/List/LatestNews/17/index.html',
+    filename: 'University/Web/zhTW/List/LatestNews/17/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/enUS/List/LatestNews/17/index.html',
+    filename: 'University/Web/enUS/List/LatestNews/17/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/zhTW/List/LatestNews/18/index.html',
+    filename: 'University/Web/zhTW/List/LatestNews/18/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/enUS/List/LatestNews/18/index.html',
+    filename: 'University/Web/enUS/List/LatestNews/18/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/zhTW/List/LatestNews/19/index.html',
+    filename: 'University/Web/zhTW/List/LatestNews/19/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/enUS/List/LatestNews/19/index.html',
+    filename: 'University/Web/enUS/List/LatestNews/19/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/zhTW/List/LatestNews/20/index.html',
+    filename: 'University/Web/zhTW/List/LatestNews/20/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/enUS/List/LatestNews/20/index.html',
+    filename: 'University/Web/enUS/List/LatestNews/20/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/zhTW/List/LatestNews/21/index.html',
+    filename: 'University/Web/zhTW/List/LatestNews/21/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/enUS/List/LatestNews/21/index.html',
+    filename: 'University/Web/enUS/List/LatestNews/21/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/zhTW/List/LatestNews/22/index.html',
+    filename: 'University/Web/zhTW/List/LatestNews/22/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/enUS/List/LatestNews/22/index.html',
+    filename: 'University/Web/enUS/List/LatestNews/22/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Prospectivestudents/zhTW/List/LatestNews/index.html',
+    filename: 'University/Prospectivestudents/zhTW/List/LatestNews/0/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Prospectivestudents/enUS/List/LatestNews/index.html',
+    filename: 'University/Prospectivestudents/enUS/List/LatestNews/0/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Alumni/zhTW/List/LatestNews/index.html',
+    filename: 'University/Alumni/zhTW/List/LatestNews/0/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Alumni/enUS/List/LatestNews/index.html',
+    filename: 'University/Alumni/enUS/List/LatestNews/0/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',

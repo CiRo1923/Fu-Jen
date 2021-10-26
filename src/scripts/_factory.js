@@ -81,12 +81,15 @@ export const path = (name) => {
 export const params = (key) => {
   let paramsValue = null;
 
-  if ((key === 'listPath' && /(\d+)\/?$/.test(window.location.pathname)) || key === 'articleId') {
-    paramsValue = /(\d+)\/?$/.exec(window.location.pathname)[1];
+  if (key === 'listPath' && /List\/\w+\/(\d+)/.test(window.location.pathname)) {
+    const id = /List\/\w+\/(\d+)/.exec(window.location.pathname)[1];
+    paramsValue = id === '0' ? null : id;
   } else if (key === 'categoryId') {
     paramsValue = new RegExp(`${getFunctionCadeData().id}/(\\d+)`).test(window.location.pathname)
       ? new RegExp(`${getFunctionCadeData().id}/(\\d+)`).exec(window.location.pathname)[1]
       : null;
+  } else if ((key === 'articleId' && /(\d+)\/?$/.test(window.location.pathname)) || key === 'listPage') {
+    paramsValue = /(\d+)\/?$/.exec(window.location.pathname)[1];
   } else if (key === 'menuPage') {
     paramsValue = new RegExp(`(?!${rootPath})\\/(.*TW|.*tw|en)\\/(\\w+)`).exec(window.location.pathname)[2];
   } else if (key === 'menuPageId' || key === 'page') {
@@ -164,12 +167,14 @@ export const actionURL = (page, param) => {
           //   : `${query || newPath}${paramValue}/`;
           query = `${newPath}${paramValue}/`;
         } else if (paramName === 'listCategory') {
-          const categoryId = /\d+\/?$/.test(window.location.pathname)
-            ? `${window.location.pathname.replace(/\/$/, '').replace(/\d+\/?$/, `${paramValue}/`)}`
+          const categoryId = /List\/(\w+)\/(\d+)\//.test(window.location.pathname)
+            ? `${window.location.pathname.replace(/\/$/, '').replace(/List\/(\w+)\/(\d+)\//, `List/$1/${paramValue}/`)}`
             : `${query || newPath}${paramValue}/`;
           query = categoryId;
         } else if (paramName === 'articleCategory') {
           query = `${query}${paramValue}/`;
+        } else if (paramName === 'page') {
+          query = `${query.replace(/\d+$/, paramValue)}/`;
         } else {
           query = `${query || newPath}${paramName}`;
         }

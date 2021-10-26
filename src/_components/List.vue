@@ -4,11 +4,13 @@ import {
   language, params, getFunctionCadeData, path, actionURL, dateReturn, getYoutubeImage, listAllName, getImageSrc
 } from '../scripts/_factory.js';
 import mTitle from './_modules/mTitle.vue';
-import BreadCrumbs from './BreadCrumbs.vue';
+import mBreadCrumbs from './_modules/mBreadCrumbs.vue';
+import mPagination from './_modules/mPagination.vue';
 
 export default {
   components: {
-    'm-Bread-crumbs': BreadCrumbs,
+    'm-bread-crumbs': mBreadCrumbs,
+    'm-pagination': mPagination,
     'm-title': mTitle
   },
   inject: {
@@ -32,7 +34,10 @@ export default {
       listCategoryName: {
         englishName: listAllName.englishName,
         chineseName: listAllName.chineseName
-      }
+      },
+      page: [],
+      nowPage: params('listPage'),
+      totalPage: 0
     };
   },
   created() {
@@ -54,14 +59,45 @@ export default {
       await apiArticles({
         CategoryId: params('listPath'),
         FunctionCode: vm.funCode.id,
-        Size: 999
+        Page: vm.nowPage,
+        Size: 10
       }).then(res => {
         const { status, data } = res;
+        const noePage = Number(vm.nowPage);
+        const maxItem = Number(document.querySelector('[name="maxItem"]').value);
+        const pageItem = Number(document.querySelector('[name="pageItem"]').value);
+        const pagePush = (index) => {
+          vm.page.push({
+            number: (index + 1),
+            url: actionURL(vm.listPath, [`functionCode-${vm.funCode.id}`, `listCategory-${params('listPath') || 0}`, `page-${(index + 1)}`])
+          });
+        };
 
         if (status === 200) {
-          const items = data.data.items;
+          const { items, totalSize } = data.data;
 
           console.log(data);
+
+          vm.totalPage = Math.ceil(totalSize / maxItem);
+
+          if (vm.totalPage <= pageItem) {
+            for (let i = 0; i < vm.totalPage; i += 1) {
+              pagePush(i);
+            }
+          } else if ((noePage + pageItem) >= vm.totalPage) {
+            for (let i = (vm.totalPage - pageItem); i < vm.totalPage; i += 1) {
+              pagePush(i);
+            }
+          } else {
+            for (let i = (noePage - 1); i < (noePage + (pageItem - 1)); i += 1) {
+              pagePush(i);
+            }
+          }
+
+          console.log(vm.totalPage);
+          console.log(vm.page);
+          console.log(Number(vm.nowPage));
+
           vm.list = items;
         }
       });
@@ -88,7 +124,7 @@ export default {
 
 <template>
   <div class="mx-auto p:w-cnt t:w-4/5 m:mt-24 m:px-12">
-    <m-Bread-crumbs
+    <m-bread-crumbs
       :path="[(/en/.test(language) ? funCode.englishName : funCode.chineseName),
               (/en/.test(language) ? listCategoryName.englishName : listCategoryName.chineseName)]"
     />
@@ -160,6 +196,13 @@ export default {
           </div>
         </li>
       </ul>
+      <footer class="mListFt text-center">
+        <m-pagination
+          :first-url="actionURL(listPath, [`functionCode-${funCode?.id}`, `listCategory-${params('listPath') || 0}`, 'page-1'])"
+          :last-url="actionURL(listPath, [`functionCode-${funCode?.id}`, `listCategory-${params('listPath') || 0}`, `page-${totalPage}`])"
+          :pages="page"
+        />
+      </footer>
     </div>
   </div>
 </template>

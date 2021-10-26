@@ -1,5 +1,5 @@
 <script>
-import { language, actionURL } from '../scripts/_factory.js';
+import { language, actionURL } from '../../scripts/_factory.js';
 
 export default {
   props: {

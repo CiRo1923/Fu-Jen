@@ -1,10 +1,10 @@
 <script>
 import mTitle from './mTitle.vue';
-import BreadCrumbs from '../BreadCrumbs.vue';
+import mBreadCrumbs from './mBreadCrumbs.vue';
 
 export default {
   components: {
-    'm-Bread-crumbs': BreadCrumbs,
+    'm-bread-crumbs': mBreadCrumbs,
     'm-title': mTitle
   },
   props: {
@@ -22,7 +22,7 @@ export default {
 
 <template>
   <div class="mArticle mx-auto p:w-cnt t:w-4/5 m:px-12">
-    <m-Bread-crumbs :path="breadCrumbs" />
+    <m-bread-crumbs :path="breadCrumbs" />
     <article :class="style?.article">
       <header
         class="mArticleHd flex flex-col-reverse p:mb-40 tm:mb-28"

@@ -1,153 +1,167 @@
 module.exports = {
   HtmlWebpackPlugin: [{
-    filename: 'University/Web/zhTW/List/CampusFocus/index.html',
+    filename: 'University/Web/zhTW/List/CampusFocus/0/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/enUS/List/CampusFocus/index.html',
+    filename: 'University/Web/enUS/List/CampusFocus/0/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/zhTW/List/CampusFocus/35/index.html',
+    filename: 'University/Web/zhTW/List/CampusFocus/0/2/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/enUS/List/CampusFocus/35/index.html',
+    filename: 'University/Web/enUS/List/CampusFocus/0/2/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/zhTW/List/CampusFocus/1/index.html',
+    filename: 'University/Web/zhTW/List/CampusFocus/35/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/enUS/List/CampusFocus/1/index.html',
+    filename: 'University/Web/enUS/List/CampusFocus/35/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/zhTW/List/CampusFocus/5/index.html',
+    filename: 'University/Web/zhTW/List/CampusFocus/1/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/enUS/List/CampusFocus/5/index.html',
+    filename: 'University/Web/enUS/List/CampusFocus/1/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/zhTW/List/CampusFocus/8/index.html',
+    filename: 'University/Web/zhTW/List/CampusFocus/5/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/enUS/List/CampusFocus/8/index.html',
+    filename: 'University/Web/enUS/List/CampusFocus/5/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/zhTW/List/CampusFocus/9/index.html',
+    filename: 'University/Web/zhTW/List/CampusFocus/8/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/enUS/List/CampusFocus/9/index.html',
+    filename: 'University/Web/enUS/List/CampusFocus/8/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/zhTW/List/CampusFocus/10/index.html',
+    filename: 'University/Web/zhTW/List/CampusFocus/9/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/enUS/List/CampusFocus/10/index.html',
+    filename: 'University/Web/enUS/List/CampusFocus/9/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/zhTW/List/CampusFocus/31/index.html',
+    filename: 'University/Web/zhTW/List/CampusFocus/10/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/enUS/List/CampusFocus/31/index.html',
+    filename: 'University/Web/enUS/List/CampusFocus/10/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/zhTW/List/CampusFocus/32/index.html',
+    filename: 'University/Web/zhTW/List/CampusFocus/31/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Web/enUS/List/CampusFocus/32/index.html',
+    filename: 'University/Web/enUS/List/CampusFocus/31/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Prospectivestudents/zhTW/List/CampusFocus/index.html',
+    filename: 'University/Web/zhTW/List/CampusFocus/32/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Prospectivestudents/enUS/List/CampusFocus/index.html',
+    filename: 'University/Web/enUS/List/CampusFocus/32/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Alumni/zhTW/List/CampusFocus/index.html',
+    filename: 'University/Prospectivestudents/zhTW/List/CampusFocus/0/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
     description: '',
     chunks: ['list']
   }, {
-    filename: 'University/Alumni/enUS/List/CampusFocus/index.html',
+    filename: 'University/Prospectivestudents/enUS/List/CampusFocus/0/1/index.html',
+    template: '_shared/layout.ejs',
+    includeName: 'List/index.ejs',
+    title: '',
+    description: '',
+    chunks: ['list']
+  }, {
+    filename: 'University/Alumni/zhTW/List/CampusFocus/0/1/index.html',
+    template: '_shared/layout.ejs',
+    includeName: 'List/index.ejs',
+    title: '',
+    description: '',
+    chunks: ['list']
+  }, {
+    filename: 'University/Alumni/enUS/List/CampusFocus/0/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
     title: '',
