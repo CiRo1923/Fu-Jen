@@ -71,6 +71,22 @@ export default {
       const vm = this;
 
       return /en/.test(vm.language) ? article?.englishName : article?.chineseName;
+    },
+    getVideo(article) {
+      const vm = this;
+      let videoURL = null;
+
+      if (article?.type === 2) {
+        if (/en/.test(vm.language)) {
+          videoURL = article?.englishVideoURL || null;
+        } else {
+          videoURL = article?.chineseVideoURL || null;
+        }
+      }
+
+      return videoURL
+        ? videoURL.match(/(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/ ]{11})/i)[1]
+        : videoURL;
     }
   }
 };
@@ -94,7 +110,7 @@ export default {
       </span>
       <div class="flex-shrink-0">
         <a
-          :href="actionURL(listPath, [funCode.id])"
+          :href="actionURL(listPath, [funCode.id, '0', '1'])"
           title="返回列表"
         >
           <em class="p:text-20 t:text-16 m:text-14 not-italic">&lt; 返回列表</em>
@@ -105,6 +121,20 @@ export default {
       <!-- eslint-disable vue/no-v-html -->
       <div v-html="(/en/.test(language) ? article?.englishContent : article?.chineseContent)" />
       <!--eslint-enable-->
+      <div
+        v-if="getVideo(article)"
+        class="video p:mt-20 t:mt-16 m:mt-12"
+      >
+        <iframe
+          width="100%"
+          height="100%"
+          :src="`https://www.youtube.com/embed/${getVideo(article)}`"
+          :title="getTitle(article)"
+          frameborder="0"
+          allow="accelerometer;  clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        />
+      </div>
     </template>
   </m-article>
 </template>

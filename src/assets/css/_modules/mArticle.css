@@ -1,1 +1,6 @@
 /* mArticle */
+.mArticleBd {
+  img {
+    max-width: 100% !important;
+  }
+}

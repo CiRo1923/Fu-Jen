@@ -4,11 +4,38 @@
 }
 
 .mNavMainItem,
-.mNavMainSubItem {
+.mNavMainSubItem,
+.mNavItem {
+  line-height: 1.2;
   transition: color 0.3s;
 }
 
+.mNavId {
+  > ul {
+    > li {
+      line-height: 1.2;
+    }
+  }
+}
+
+.mNavType {
+  > ul {
+    > li {
+      flex: 0 1 100%;
+    }
+  }
+}
+
 @screen p {
+  .mNavMain {
+    padding-left: 430px;
+  }
+
+  .mNavType {
+    width: 400px;
+    transform: translateY(-50%);
+  }
+
   .mNavItem {
     &:not(:last-child) {
       &::after {
@@ -140,6 +167,14 @@
         svg {
           transform: rotate(90deg);
         }
+      }
+    }
+  }
+
+  .mNavType {
+    > ul {
+      > li {
+        z-index: 0;
       }
     }
   }

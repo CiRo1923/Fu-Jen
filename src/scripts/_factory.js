@@ -80,9 +80,10 @@ export const path = (name) => {
 
 export const params = (key) => {
   let paramsValue = null;
+  const listRegex = new RegExp(`${document.querySelector('[name="listPath"]').value}\\w+\\/(\\d+)`);
 
-  if (key === 'listPath' && /List\/\w+\/(\d+)/.test(window.location.pathname)) {
-    const id = /List\/\w+\/(\d+)/.exec(window.location.pathname)[1];
+  if (key === 'listPath' && listRegex.test(window.location.pathname)) {
+    const id = listRegex.exec(window.location.pathname)[1];
     paramsValue = id === '0' ? null : id;
   } else if (key === 'categoryId') {
     paramsValue = new RegExp(`${getFunctionCadeData().id}/(\\d+)`).test(window.location.pathname)

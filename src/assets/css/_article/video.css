@@ -1,0 +1,20 @@
+@screen p {
+  .video {
+    width: 960px;
+    height: calc(315 / 560 * 960px);
+  }
+}
+
+@screen t {
+  .video {
+    width: 615px;
+    height: calc(315 / 560 * 615px);
+  }
+}
+
+@screen m {
+  .video {
+    width: 351px;
+    height: calc(315 / 560 * 351px);
+  }
+}

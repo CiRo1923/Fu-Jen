@@ -64,8 +64,8 @@ export default {
       }).then(res => {
         const { status, data } = res;
         const noePage = Number(vm.nowPage);
-        const maxItem = Number(document.querySelector('[name="maxItem"]').value);
-        const pageItem = Number(document.querySelector('[name="pageItem"]').value);
+        const maxItem = Number(document.querySelector('#list').dataset.maxItem);
+        const pageItem = Number(document.querySelector('#list').dataset.pageItem);
         const pagePush = (index) => {
           vm.page.push({
             number: (index + 1),
@@ -200,7 +200,9 @@ export default {
         <m-pagination
           :first-url="actionURL(listPath, [`functionCode-${funCode?.id}`, `listCategory-${params('listPath') || 0}`, 'page-1'])"
           :last-url="actionURL(listPath, [`functionCode-${funCode?.id}`, `listCategory-${params('listPath') || 0}`, `page-${totalPage}`])"
+          :now-page="nowPage"
           :pages="page"
+          class="p:mt-80 t:mt-48 m:mt-24"
         />
       </footer>
     </div>

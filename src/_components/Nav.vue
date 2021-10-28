@@ -50,6 +50,20 @@ export default {
       isAct: false
     };
   },
+  computed: {
+    typeLinks() {
+      const vm = this;
+      let links = [];
+
+      if (/en/.test(vm.language)) {
+        links = JSON.parse(document.querySelector('[name="engilshTypeLinks"]').value.replace(/'/g, '"'));
+      } else {
+        links = JSON.parse(document.querySelector('[name="chiineseTypeLinks"]').value.replace(/'/g, '"'));
+      }
+
+      return links;
+    }
+  },
   created() {
     const vm = this;
     let routeId = null;
@@ -108,6 +122,16 @@ export default {
       $navMainSub.forEach(item => {
         item.style.maxHeight = `${item.firstChild.clientHeight}px`;
       });
+    },
+    setNavFz() {
+      const vm = this;
+
+      return /en/.test(vm.language) ? 'p:text-18' : 'p:text-20';
+    },
+    setNavIDFz() {
+      const vm = this;
+
+      return /en/.test(vm.language) ? 'p:text-16' : 'p:text-18';
     }
   }
 };
@@ -119,7 +143,11 @@ export default {
     :class="{'act': isAct}"
   >
     <div
-      class="mNavMain tm:left-0 tm:w-full tm:overflow-hidden tm:z-10 tm:absolute p:h-full p:flex p:flex-grow p:flex-col-reverse t:px-48 m:px-32"
+      class="mNavMain
+      tm:left-0 tm:w-full tm:overflow-hidden tm:z-10 tm:absolute
+      p:h-full p:flex p:flex-grow p:flex-col-reverse p:relative
+      t:px-48 t:pt-20
+      m:px-32 m:pt-10"
       :class="bgColor"
     >
       <nav class="p:h-1/2 p:flex p:items-start p:justify-end">
@@ -138,7 +166,10 @@ export default {
               :rel="getRel((/en/.test(language) ? item.englishURLActionType : item.chineseURLActionType))"
               class="p:h-full block"
             >
-              <em class="pt:text-20 m:text-18 not-italic"><strong>{{ /en/.test(language) ? item.englishName : item.chineseName }}</strong></em>
+              <em
+                class="t:text-20 m:text-18 not-italic"
+                :class="setNavFz()"
+              ><strong>{{ /en/.test(language) ? item.englishName : item.chineseName }}</strong></em>
             </a>
             <button
               v-else
@@ -147,7 +178,10 @@ export default {
               tabindex="-1"
               @click="isNav = index"
             >
-              <em class="pt:text-20 m:text-18 not-italic"><strong>{{ /en/.test(language) ? item.englishName : item.chineseName }}</strong></em>
+              <em
+                class="t:text-20 m:text-18 not-italic"
+                :class="setNavFz()"
+              ><strong>{{ /en/.test(language) ? item.englishName : item.chineseName }}</strong></em>
               <m-svg
                 class="t:ml-8 m:ml-6 p:hidden"
                 :class="svgColor"
@@ -193,37 +227,57 @@ export default {
               <li
                 v-for="item in id"
                 :key="item.chineseName"
-                class="p:px-10 t:w-1/5 m:w-1/2"
+                class="text-center p:px-10 t:w-1/5 m:w-1/2"
               >
                 <a
                   :href="item.url || actionURL(null, [`userRoute-${item.routeName}`])"
                   :title="(/en/.test(language) ? item.englishName : item.chineseName)"
                   :target="item.isInternal ? null : '_blank'"
                   :rel="item.isInternal ? null : 'noopener'"
-                  class="p:text-18 t:text-16 m:text-14 p:text-x057d"
-                  :class="textColor"
+                  class="t:text-16 m:text-14 p:text-x057d"
+                  :class="[setNavIDFz(), textColor]"
                 >
                   {{ /en/.test(language) ? item.englishName : item.chineseName }}
                 </a>
               </li>
             </ul>
           </div>
-          <div class="mNavLinks relative p:ml-24 p:px-24 p:py-4 p:bg-x1479 p:rounded-20 t:py-16 m:mt-12 m:py-12">
+          <div class="mNavLinks p:ml-24 p:px-24 p:py-4 p:bg-x1479 p:rounded-20 tm:relative t:py-16 m:mt-12 m:py-12">
+            <div class="mNavType overflow-hidden p:left-0 p:top-1/2 p:absolute t:mb-20 m:mb-14">
+              <ul class="flex item-center p:-mx-10 t:-mx-8 m:-mx-5">
+                <li
+                  v-for="item in typeLinks"
+                  :key="item.name"
+                  class="p:px-10 t:px-8 m:px-5"
+                >
+                  <!-- eslint-disable vue/no-v-html -->
+                  <a
+                    class="px-8 py-5 w-full h-full box-border block text-center border-2 rounded-10 pt:text-13 m:text-12"
+                    :class="[item.borderColor, item.color]"
+                    :href="item.url"
+                    :title="item.name"
+                    :target="item.trager"
+                    v-html="item.name"
+                  />
+                  <!--eslint-enable-->
+                </li>
+              </ul>
+            </div>
             <ul class="flex items-center tm:text-x1479 p:text-14 p:text-xf p:-mx-10 t:mx-auto t:w-1/2">
               <li
                 v-for="item in links"
                 :key="item.chineseName"
-                class="mNavItem box-border relative p:px-10"
+                class="mNavItem box-border text-center relative p:px-10"
               >
                 <a
-                  class="box-border tm:text-center tm:flex tm:flex-col tm:justify-center t:px-16 t:text-15 m:px-12 m:text-13"
+                  class="box-border tm:flex tm:flex-col tm:justify-center t:px-16 t:text-15 m:px-12 m:text-13"
                   :href="actionURL(listPath, [item.id, '0', '1'])"
                   :title="(/en/.test(language) ? item.englishName : item.chineseName)"
                 >{{ /en/.test(language) ? item.englishName : item.chineseName }}</a>
               </li>
-              <li class="mNavItem box-border relative p:px-10">
+              <li class="mNavItem box-border text-center relative p:px-10">
                 <a
-                  class="box-border tm:text-center tm:flex tm:flex-col tm:justify-center t:px-16 t:text-15 m:px-12 m:text-13"
+                  class="box-border tm:flex tm:flex-col tm:justify-center t:px-16 t:text-15 m:px-12 m:text-13"
                   :href="actionURL(null, [`language-${langURL}`])"
                   :title="langText"
                 >{{ langText }}</a>
