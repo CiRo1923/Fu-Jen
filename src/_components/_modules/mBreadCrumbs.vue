@@ -32,17 +32,17 @@ export default {
         class="mBreadCrumbsItem flex items-center p:text-20 t:text-14 relative"
       >
         <a
-          v-if="item?.split('-')[1]"
+          v-if="item?.split('|||')[1]"
           class="inline-block"
-          :href="item?.split('-')[1]"
+          :href="item?.split('|||')[1]"
         >
-          {{ item?.split('-')[0] }}
+          {{ item?.split('|||')[0] }}
         </a>
         <em
           v-else
           class="not-italic inline-block"
         >
-          {{ item?.split('-')[0] }}
+          {{ item?.split('|||')[0] }}
         </em>
       </li>
     </ol>

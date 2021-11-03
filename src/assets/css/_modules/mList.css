@@ -1,9 +1,6 @@
 .mListItemFig {
+  width: 200%;
   transform: translateX(-50%);
-
-  img {
-    @apply h-full;
-  }
 }
 
 .mListItemFigFrame {
@@ -27,16 +24,6 @@
       z-index: 2;
 
       @apply w-0 h-0 border-solid;
-    }
-
-    .mListItemFig {
-      width: 200%;
-    }
-  }
-
-  &:not(.--video) {
-    .mListItemFig {
-      @apply w-full;
     }
   }
 }
@@ -96,7 +83,7 @@
     &.--video {
       &::before {
         width: 26px;
-        height: (40 / 60 * 26px);
+        height: calc(40 / 60 * 26px);
 
         @apply rounded-4;
       }

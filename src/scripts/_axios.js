@@ -18,3 +18,4 @@ export const apiLinks = (data) => apiRequest.get('links', { params: data });
 export const apiPpagepictures = (data) => apiRequest.get('indexpagepictures', { params: data });
 export const apiMenupage = (data) => apiRequest.get('menupage', { params: data });
 export const apiPage = (data) => apiRequest.get('page', { params: data });
+export const apiPositionSetting = (data) => apiRequest.get('websitesectionpositionsettings', { params: data });

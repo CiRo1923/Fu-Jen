@@ -1,7 +1,7 @@
 <script>
 import Svg from './Svg.vue';
 import mSlider from './_modules/mSlider.vue';
-import { apiArticles } from '../scripts/_axios.js';
+import { apiArticles, apiLinks, apiPositionSetting } from '../scripts/_axios.js';
 import {
   language, path, actionURL, getFunctionCadeData, getYoutubeImage, dateReturn, device, importantName, getImageSrc
 } from '../scripts/_factory.js';
@@ -20,7 +20,9 @@ export default {
       listPath: path('listPath'),
       articlePath: path('articlePath'),
       importantName: importantName,
+      positionSetting: false,
       news: [],
+      square: false,
       latestNews: [],
       campusFocus: [],
       links: [],
@@ -50,13 +52,13 @@ export default {
         }
       }
     };
-    const apiData = (saveArray, arrayName, page, params, callback) => {
+    const apiData = (api, saveArray, arrayName, page, params, callback) => {
       // let saveData = saveDatas;
 
       if (saveArray.length !== 0) {
         forEachData(arrayName, saveArray, page);
       } else {
-        apiArticles(params).then(res => {
+        api(params).then(res => {
           const { status, data } = res;
 
           if (status === 200) {
@@ -87,89 +89,144 @@ export default {
     };
 
     const apiAsync = async () => {
-      // 取得 快訊
-      vm.news = [];
-      apiData(newsData, vm.news, 2, {
-        CategoryId: 22,
-        FunctionCode: 'LatestNews',
-        OrderByType: 'SortNumber'
-      });
+      // 取得所有網站版位設定
+      if (!vm.positionSetting) {
+        vm.positionSetting = true;
 
-      // 取得 最新動態
-      vm.latestNews = [];
-      apiData(latestNewsData, vm.latestNews, (device() === 'P' ? 3 : 2), {
-        FunctionCode: 'LatestNews',
-        ExcludeCategoryString: '快訊',
-        Size: 15,
-        OrderByType: 'SortNumber'
-      });
-
-      // 取得 校園焦點
-      vm.campusFocus = [];
-      apiData(campusFocusData, vm.campusFocus, 3, {
-        FunctionCode: 'CampusFocus',
-        ExcludeCategoryString: '專輯報導',
-        Size: 9,
-        OrderByType: 'SortNumber'
-      });
-
-      // 取得 重要連結與公告
-      vm.links = [];
-      apiData(linksData, vm.links, 6, {
-        CategoryId: 4,
-        FunctionCode: 'Link',
-        Size: 24,
-        OrderByType: 'SortNumber'
-      });
-
-      // 取得 專題報導
-      vm.report = [];
-      apiData(reportData, vm.report, 1, {
-        CategoryId: 10,
-        FunctionCode: 'CampusFocus',
-        IsWithContent: 1,
-        Size: 1,
-        OrderByType: 'SortNumber'
-      }, (data) => {
-        const items = data.items;
-        if (items.length !== 0) {
-          vm.reportName = /en/.test(vm.language) ? items[0].categoryEnglishName : items[0].categoryName;
-          vm.reportMore = actionURL(vm.articlePath, ['CampusFocus', (items[0].categoryId + ''), (items[0].articleId + '')]);
-        }
-      });
-
-      // 取得 影音專區
-      if (!vm.video) {
-        await apiArticles({
-          FunctionCode: 'Audiovisual',
-          Size: 4,
-          OrderByType: 'SortNumber'
-        }).then(res => {
+        await apiPositionSetting().then(res => {
           const { status, data } = res;
 
+          console.log(data);
+
           if (status === 200) {
-            const items = data.data.items;
-            console.log(data);
+            const { items } = data.data;
 
-            vm.video = items;
+            for (let i = 0; i < items.length; i += 1) {
+              const { isActive, websiteSectionPositionSettingId } = items[i];
 
-            for (let i = 0; i < vm.video.length; i += 1) {
-              const { categoryId, articleId } = vm.video[i];
+              if (websiteSectionPositionSettingId === 1) {
+              // 取得 快訊
+                vm.news = [];
+                if (isActive === 1) {
+                  apiData(apiArticles, newsData, vm.news, 2, {
+                    CategoryId: 22,
+                    FunctionCode: 'LatestNews',
+                    OrderByType: 'SortNumber',
+                    isChineseActive: /en/.test(vm.language.toLowerCase()) ? 0 : 1,
+                    isEnglishActive: /en/.test(vm.language.toLowerCase()) ? 1 : 0
+                  });
+                }
+              }
 
-              vm.video[i].linksURL = actionURL(vm.articlePath, ['Audiovisual', (categoryId + ''), (articleId + '')]);
+              if (websiteSectionPositionSettingId === 2) {
+              // 取得 最新動態
+                vm.latestNews = [];
+                // 取得 重要連結與公告
+                vm.links = [];
+                // 取得 校園焦點
+                vm.campusFocus = [];
+                // 取得 專題報導
+                vm.report = [];
+
+                if (isActive === 1) {
+                  vm.square = true;
+
+                  // 取得 最新動態
+                  apiData(apiArticles, latestNewsData, vm.latestNews, (device() === 'P' ? 3 : 2), {
+                    FunctionCode: 'LatestNews',
+                    ExcludeCategoryString: '快訊',
+                    Size: (device() === 'P' ? 15 : 10),
+                    OrderByType: 'SortNumber',
+                    isChineseActive: /en/.test(vm.language.toLowerCase()) ? 0 : 1,
+                    isEnglishActive: /en/.test(vm.language.toLowerCase()) ? 1 : 0
+                  });
+
+                  // 取得 重要連結與公告
+                  apiData(apiLinks, linksData, vm.links, (device() === 'P' ? 8 : 5), {
+                    CategoryId: 4,
+                    TopCount: (device() === 'P' ? 24 : 15),
+                    isChineseActive: /en/.test(vm.language.toLowerCase()) ? 0 : 1,
+                    isEnglishActive: /en/.test(vm.language.toLowerCase()) ? 1 : 0
+                  });
+
+                  // 取得 校園焦點
+                  apiData(apiArticles, campusFocusData, vm.campusFocus, 3, {
+                    FunctionCode: 'CampusFocus',
+                    ExcludeCategoryString: '專輯報導',
+                    Size: 9,
+                    OrderByType: 'SortNumber',
+                    isChineseActive: /en/.test(vm.language.toLowerCase()) ? 0 : 1,
+                    isEnglishActive: /en/.test(vm.language.toLowerCase()) ? 1 : 0
+                  });
+
+                  // 取得 專題報導
+                  apiData(apiArticles, reportData, vm.report, 1, {
+                    CategoryId: 10,
+                    FunctionCode: 'CampusFocus',
+                    IsWithContent: 1,
+                    Size: 1,
+                    OrderByType: 'SortNumber',
+                    isChineseActive: /en/.test(vm.language.toLowerCase()) ? 0 : 1,
+                    isEnglishActive: /en/.test(vm.language.toLowerCase()) ? 1 : 0
+                  }, (reportRes) => {
+                    const { items: reportItems } = reportRes;
+                    if (reportItems.length !== 0) {
+                      vm.reportName = /en/.test(vm.language) ? items[0].categoryEnglishName : items[0].categoryName;
+                      vm.reportMore = actionURL(vm.articlePath, ['CampusFocus', (items[0].categoryId + ''), (items[0].articleId + '')]);
+                    }
+                  });
+                }
+              }
+
+              if (websiteSectionPositionSettingId === 3) {
+                if (isActive === 1) {
+                // 取得 影音專區
+                  if (!vm.video) {
+                    apiArticles({
+                      FunctionCode: 'Audiovisual',
+                      Size: 4,
+                      OrderByType: 'SortNumber',
+                      isChineseActive: /en/.test(vm.language.toLowerCase()) ? 0 : 1,
+                      isEnglishActive: /en/.test(vm.language.toLowerCase()) ? 1 : 0
+                    }).then(videoRes => {
+                      const { status: videoStatus, data: videoData } = videoRes;
+
+                      if (videoStatus === 200) {
+                        const { items: videoItems } = videoData.data;
+                        console.log(videoData);
+
+                        vm.video = videoItems;
+
+                        for (let j = 0; j < vm.video.length; j += 1) {
+                          const { categoryId, articleId } = vm.video[j];
+
+                          vm.video[j].linksURL = actionURL(vm.articlePath, ['Audiovisual', (categoryId + ''), (articleId + '')]);
+                        }
+                      }
+                    });
+                  }
+                }
+              }
+
+              if (websiteSectionPositionSettingId === 4) {
+              // 取得 榮譽榜
+                vm.honorRoll = [];
+
+                if (isActive === 1) {
+                  apiData(apiArticles, honorRollData, vm.honorRoll, 4, {
+                    FunctionCode: 'HonorRoll',
+                    IsWithContent: 1,
+                    Size: 12,
+                    OrderByType: 'SortNumber',
+                    isChineseActive: /en/.test(vm.language.toLowerCase()) ? 0 : 1,
+                    isEnglishActive: /en/.test(vm.language.toLowerCase()) ? 1 : 0
+                  });
+                }
+              }
             }
           }
         });
       }
-
-      // 取得 榮譽榜
-      vm.honorRoll = [];
-      apiData(honorRollData, vm.honorRoll, 4, {
-        FunctionCode: 'HonorRoll',
-        IsWithContent: 1,
-        Size: 12,
-        OrderByType: 'SortNumber'
-      });
     };
 
     apiAsync();
@@ -191,9 +248,17 @@ export default {
         linksURL = /en/.test(vm.language) ? item.englishPicturePath : item.chinesePicturePath;
       } else if (item.type === 2) {
         linksURL = /en/.test(vm.language) ? item.englishVideoURL : item.chineseVideoURL;
+      } else if (!item.type) {
+        linksURL = /en/.test(vm.language) ? item.englishURL : item.chineseURL;
       }
 
       return linksURL;
+    },
+    getTarget(url) {
+      return /^https?:\/\//.test(url) ? '_blank' : null;
+    },
+    getRel(url) {
+      return /^https?:\/\//.test(url) ? 'noopener' : null;
     },
     getHonorRollImg(item) {
       const vm = this;
@@ -219,7 +284,7 @@ export default {
       const vm = this;
       let description = /en/.test(vm.language) ? item.englishContent : item.chineseContent;
 
-      description = description.replace(/<[^>]+>/g, '');
+      description = description ? description.replace(/<[^>]+>/g, '') : null;
 
       return description;
     }
@@ -229,11 +294,11 @@ export default {
 
 <template>
   <div class="home">
-    <div class="news overflow-hidden relative p:py-36 t:py-28 m:py-20">
-      <div
-        v-if="news.length !== 0"
-        class="mx-auto p:w-cnt t:w-4/6"
-      >
+    <div
+      v-if="news.length !== 0"
+      class="news overflow-hidden relative p:py-36 t:py-28 m:py-20"
+    >
+      <div class="mx-auto p:w-cnt t:w-4/6">
         <m-slider
           :key="`news_tinySilder_${news.length}`"
           name="news"
@@ -268,7 +333,10 @@ export default {
         </m-slider>
       </div>
     </div>
-    <div class="latestNews pt:flex">
+    <div
+      v-if="square"
+      class="latestNews pt:flex"
+    >
       <div class="pt:w-1/2">
         <div class="flex">
           <section class="section w-1/2 bg-xb139 box-border flex flex-col relative p:p-20 tm:p-8">
@@ -415,6 +483,8 @@ export default {
                       <a
                         :href="getLinksURL(item)"
                         class="text-xf block truncate p:text-22 tm:text-12"
+                        :target="getTarget(getLinksURL(item))"
+                        :rel="getRel(getLinksURL(item))"
                         :title="(/en/.test(language) ? item.englishName : item.chineseName)"
                       >
                         {{ /en/.test(language) ? item.englishName : item.chineseName }}
@@ -487,7 +557,10 @@ export default {
         </div>
       </div>
     </div>
-    <div class="audio text-center overflow-hidden relative">
+    <div
+      v-if="video"
+      class="audio text-center overflow-hidden relative"
+    >
       <div class="top-0 left-0 w-full h-full flex flex-col items-center justify-center absolute">
         <div class="p:-mt-40 t:-mt-48">
           <p
@@ -512,10 +585,7 @@ export default {
             </a>
           </div>
         </div>
-        <div
-          v-if="video"
-          class="bottom-0 absolute m:hidden"
-        >
+        <div class="bottom-0 absolute m:hidden">
           <ul class="flex items-center">
             <li
               v-for="item, index in video"
@@ -548,13 +618,13 @@ export default {
       </figure>
     </div>
     <div
+      v-if="honorRoll.length !== 0"
       class="honorRoll text-center bg-xe2 relative
       p:py-40
       t:py-28
       m:py-20"
     >
       <div
-        v-if="honorRoll.length !== 0"
         class="honorRollBd mx-auto text-left relative
         p:w-4/6
         t:w-5/6

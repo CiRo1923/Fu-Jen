@@ -101,8 +101,14 @@ export default {
           console.log(items);
 
           for (let i = 0; i < items.length; i += 1) {
+            if (items[i].children) {
+              items[i].children = vm.startDate(items[i].children);
+            }
+
             vm.menu.push(items[i]);
           }
+
+          vm.menu = vm.startDate(vm.menu);
         }
       });
     };
@@ -113,6 +119,9 @@ export default {
     });
   },
   methods: {
+    startDate(data) {
+      return data.sort((a, b) => (Number(a.sortNumber) < Number(b.sortNumber) ? 1 : -1));
+    },
     getRel(type) {
       return type === '_blank' ? 'noopener' : null;
     },
@@ -189,6 +198,7 @@ export default {
               />
             </button>
             <div
+              v-if="item.children"
               ref="navMainSub"
               class="mNavMainSub overflow-hidden p:bg-xf2 p:absolute"
               :class="{'p:left-1/2': menu.length !== (index + 1)}"
@@ -255,8 +265,8 @@ export default {
                     class="px-8 py-5 w-full h-full box-border block text-center border-2 rounded-10 pt:text-13 m:text-12"
                     :class="[item.borderColor, item.color]"
                     :href="item.url"
-                    :title="item.name"
-                    :target="item.trager"
+                    :title="item.name.replace(/<[^>]+>/g, '')"
+                    :target="item.target"
                     v-html="item.name"
                   />
                   <!--eslint-enable-->

@@ -47,7 +47,7 @@ export default {
       >
         <a
           :href="item.url"
-          class="p-5 p:text-20 t:text-16 m:text-14 flex flex-col justify-items-center"
+          class="p-5 p:text-16 t:text-14 m:text-12 flex flex-col justify-center"
         >
           {{ item.number }}
         </a>

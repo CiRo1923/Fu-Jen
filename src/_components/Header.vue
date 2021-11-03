@@ -92,8 +92,15 @@ export default {
         class="mHdLogo p:text-center t:px-20 t:py-5 m:px-12 m:py-10"
         :class="[{'--large p:pt-32 p:border-1' : isHome, 'flex-shrink-0 tm:bg-x1479': !isHome}, changeColor(info.styleClass)]"
       >
-        <div v-if="isHome">
-          <div class="mHdLogoFrame p:mx-auto p:mb-84">
+        <a
+          class="inline-block"
+          :href="actionURL('index')"
+          title="天主教輔仁大學 FUJEN CATHOLIC UNIVERSITY:回首頁"
+        >
+          <div
+            v-if="isHome"
+            class="mHdLogoFrame p:mx-auto p:mb-84"
+          >
             <m-svg
               v-if="!/en/.test(language)"
               class="tm:hidden w-full h-full"
@@ -129,7 +136,10 @@ export default {
               alt="天主教輔仁大學 FUJEN CATHOLIC UNIVERSITY"
             />
           </div>
-          <div class="mHdPhotoFrame t:absolute m:relative">
+          <div
+            v-if="isHome"
+            class="mHdPhotoFrame t:absolute m:relative"
+          >
             <figure class="mHdFig w-full h-full relative p:overflow-hidden">
               <img
                 class="pt:top-0 p:right-0 p:absolute"
@@ -139,14 +149,10 @@ export default {
               >
             </figure>
           </div>
-        </div>
-        <a
-          v-else
-          class="inline-block"
-          :href="actionURL('index')"
-          title="天主教輔仁大學 FUJEN CATHOLIC UNIVERSITY:回首頁"
-        >
-          <div class="mHdLogoFrame">
+          <div
+            v-if="!isHome"
+            class="mHdLogoFrame"
+          >
             <m-svg
               v-if="!/en/.test(language)"
               class="w-full h-full p:mx-auto p:fill-x1479 t:fill-xf m:hidden"

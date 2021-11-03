@@ -153,7 +153,7 @@ export const actionURL = (page, param) => {
         } else if (paramName === 'language') {
           let lang = null;
 
-          if (/en.*\/?$/.test(window.location.pathname)) {
+          if (/en\w+\/?$/.test(window.location.pathname)) {
             lang = '/';
           } else if (new RegExp(language()).test(window.location.pathname)) {
             lang = window.location.pathname.replace(language(), paramValue);
@@ -198,8 +198,8 @@ export const actionURL = (page, param) => {
 
 export const getYoutubeImage = (item) => {
   const youtubeURL = /en/.test(language()) ? item.englishVideoURL : item.chineseVideoURL;
-  const cover = youtubeURL.match(/(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/ ]{11})/i)[1];
-  let coverPath = `https://img.youtube.com/vi/${cover}/maxresdefault.jpg`;
+  const cover = youtubeURL ? youtubeURL.match(/(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/ ]{11})/i)[1] : null;
+  let coverPath = cover ? `https://img.youtube.com/vi/${cover}/maxresdefault.jpg` : null;
 
   return coverPath;
 };
@@ -207,6 +207,8 @@ export const getYoutubeImage = (item) => {
 export const getImageSrc = (src) => {
   let imgPath = null;
   const apiPath = path('apiPath');
+
+  console.log(/^\/uploads/.test(src.toLowerCase()));
 
   if (src) {
     if (/^www\./.test(src)) {
@@ -217,6 +219,8 @@ export const getImageSrc = (src) => {
       imgPath = src;
     }
   }
+
+  // console.log(src);
 
   return imgPath;
 };

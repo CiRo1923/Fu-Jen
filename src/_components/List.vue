@@ -43,6 +43,8 @@ export default {
   created() {
     const vm = this;
     const dataItems = vm.data.data.items;
+    const maxItem = Number(document.querySelector('#list').dataset.maxItem);
+    const pageItem = Number(document.querySelector('#list').dataset.pageItem);
 
     console.log(vm.data);
 
@@ -60,12 +62,13 @@ export default {
         CategoryId: params('listPath'),
         FunctionCode: vm.funCode.id,
         Page: vm.nowPage,
-        Size: 10
+        Size: maxItem,
+        OrderByType: 'SortNumber',
+        isChineseActive: /en/.test(vm.language.toLowerCase()) ? 0 : 1,
+        isEnglishActive: /en/.test(vm.language.toLowerCase()) ? 1 : 0
       }).then(res => {
         const { status, data } = res;
         const noePage = Number(vm.nowPage);
-        const maxItem = Number(document.querySelector('#list').dataset.maxItem);
-        const pageItem = Number(document.querySelector('#list').dataset.pageItem);
         const pagePush = (index) => {
           vm.page.push({
             number: (index + 1),
@@ -84,12 +87,20 @@ export default {
             for (let i = 0; i < vm.totalPage; i += 1) {
               pagePush(i);
             }
-          } else if ((noePage + pageItem) >= vm.totalPage) {
+          } else if ((noePage + pageItem - Math.ceil(pageItem / 2)) >= vm.totalPage) {
             for (let i = (vm.totalPage - pageItem); i < vm.totalPage; i += 1) {
               pagePush(i);
             }
           } else {
-            for (let i = (noePage - 1); i < (noePage + (pageItem - 1)); i += 1) {
+            let len = (noePage - 1);
+
+            if (noePage !== 1) {
+              len = noePage - Math.ceil(pageItem / 2) < 0 ? (noePage - Math.ceil(pageItem / 2) + 1) : noePage - Math.ceil(pageItem / 2);
+            }
+
+            console.log(Math.ceil(pageItem / 2));
+
+            for (let i = len; i < ((len + 1) + (pageItem - 1)); i += 1) {
               pagePush(i);
             }
           }
@@ -110,11 +121,13 @@ export default {
       const vm = this;
       let src = null;
 
-      if (/en/.test(vm.language) && item.englishPicturePath) {
+      if (/en/.test(vm.language.toLowerCase()) && item.englishPicturePath) {
         src = getImageSrc(item.englishPicturePath);
-      } else if (/tw/.test(vm.language) && item.chinesePicturePath) {
+      } else if (/tw/.test(vm.language.toLowerCase()) && item.chinesePicturePath) {
         src = getImageSrc(item.chinesePicturePath);
       }
+
+      // console.log(item.chinesePicturePath);
 
       return src;
     }
@@ -155,7 +168,9 @@ export default {
                 </h2>
                 <span class="p:mb-28 m:mb-5 flex p:border-b-6 m:border-b-2 border-xd0">
                   <time class="p:text-20 t:text-16 m:text-14 block">{{ dateReturn(item.startTime) }}</time>
-                  <small class="p:text-20 t:text-16 m:text-14 block p:ml-10 m:ml-5">{{ item.categoryName }}</small>
+                  <small class="p:text-20 t:text-16 m:text-14 block p:ml-10 m:ml-5">
+                    {{ /en/.test(language) ? item.categoryEnglishName : item.categoryName }}
+                  </small>
                 </span>
               </header>
               <div class="mListItemSecBd">
@@ -166,7 +181,7 @@ export default {
             </section>
             <div
               class="mListItemFigFrame p:mr-28 t:mr-16 m:mr-8 flex-shrink-0 overflow-hidden relative"
-              :class="{'--video': item.type !== 1}"
+              :class="{'--video': item.type === 2}"
             >
               <a
                 :href="actionURL(articlePath, [funCode.id, item.categoryId, item.articleId])"
@@ -174,21 +189,24 @@ export default {
                 class="block w-full h-full"
                 tabindex="-1"
               >
-                <figure class="mListItemFig top-0 left-1/2 h-full absolute">
+                <figure class="mListItemFig top-0 left-1/2 h-full text-center absolute">
                   <img
-                    v-if="item.type === 1 && getSrc(item)"
+                    v-if="item.type !== 2 && getSrc(item)"
                     :src="getSrc(item)"
                     :alt="(/en/.test(language) ? item.englishContent : item.chineseContent)"
+                    class="h-full inline-block"
                   >
                   <img
                     v-else-if="item.type === 2 && getYoutubeImage(item)"
                     :src="getYoutubeImage(item)"
                     :alt="(/en/.test(language) ? item.englishContent : item.chineseContent)"
+                    class="h-full inline-block"
                   >
                   <img
                     v-else
                     src="~list/no_picture.svg"
                     alt="no picture"
+                    class="h-full inline-block"
                   >
                 </figure>
               </a>

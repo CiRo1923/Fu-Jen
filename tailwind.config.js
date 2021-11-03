@@ -66,7 +66,7 @@ module.exports = {
   },
   theme: {
     fontFamily: {
-      body: fontFamily || 'arial, "微軟正黑體", "Microsoft JhengHei", "Heiti TC", "黑體", sans-serif, serif'
+      body: fontFamily || 'arial, 微軟正黑體, Microsoft JhengHei, Heiti TC, 黑體, sans-serif'
     },
     screens: {
       notsupport: [{

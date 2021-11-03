@@ -1,6 +1,6 @@
 <script>
 import { apiCategories, apiLinks } from '../scripts/_axios.js';
-import { language, device } from '../scripts/_factory.js';
+import { language, device, actionURL } from '../scripts/_factory.js';
 import Svg from './Svg.vue';
 import { inject, reactive } from 'vue';
 
@@ -31,6 +31,7 @@ export default {
   data() {
     return {
       language: language(),
+      actionURL: actionURL,
       links: [],
       isAct: null
     };
@@ -160,10 +161,17 @@ export default {
     <div class="p:pt-76 t:pt-28">
       <ul class="p:-mx-12 p:flex p:items-center">
         <li class="p:px-12 flex-grow flex pt:items-center t:mx-auto t:w-2/3 t:justify-between m:flex-col-reverse">
-          <m-svg
-            class="mFtLogo fill-xf w-full h-full p:mr-24 m:mx-auto"
-            svg-icon="logo_footer"
-          />
+          <div class="mFtLogo p:mr-24 m:mx-auto">
+            <a
+              :href="actionURL('index')"
+              class="w-full h-full block"
+            >
+              <m-svg
+                class=" fill-xf w-full h-full"
+                svg-icon="logo_footer"
+              />
+            </a>
+          </div>
           <ul class="mFtSocial flex items-center p:-mx-10 m:mx-auto m:my-20 m:w-11/12 m:justify-between">
             <li
               v-for="item in social"

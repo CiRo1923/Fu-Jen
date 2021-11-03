@@ -94,8 +94,8 @@ export default {
 
 <template>
   <m-article
-    :bread-crumbs="[`${getTitle(funCode)}-${actionURL(listPath, [funCode.id, '0', '1'])}`,
-                    `${getTitle(typeName)}-${actionURL(listPath, [funCode.id, params('categoryId'), '1'])}`,
+    :bread-crumbs="[`${getTitle(funCode)}|||${actionURL(listPath, [funCode.id, '0', '1'])}`,
+                    `${getTitle(typeName)}|||${actionURL(listPath, [funCode.id, params('categoryId'), '1'])}`,
                     getTitle(article)]"
   >
     <template #article_header>
