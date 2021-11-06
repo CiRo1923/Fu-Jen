@@ -7,19 +7,28 @@
 }
 
 @screen p {
-  .mHdLogo {
-    width: 480px;
+  .mHdCnt {
+    &.--width {
+      width: 25%;
+    }
+  }
 
+  .mHdLogo {
     &.--large {
       height: 790px;
 
+      @apply w-full;
+
       .mHdLogoFrame {
-        width: 320px;
         height: 264px;
+
+        @apply w-full;
       }
     }
 
     &:not(.--large) {
+      width: 480px;
+
       .mHdLogoFrame {
         width: 388px;
         height: 90px;

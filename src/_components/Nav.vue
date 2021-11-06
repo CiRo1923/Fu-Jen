@@ -155,11 +155,11 @@ export default {
       class="mNavMain
       tm:left-0 tm:w-full tm:overflow-hidden tm:z-10 tm:absolute
       p:h-full p:flex p:flex-grow p:flex-col-reverse p:relative
-      t:px-48 t:pt-20
-      m:px-32 m:pt-10"
+      t:px-48
+      m:px-32"
       :class="bgColor"
     >
-      <nav class="p:h-1/2 p:flex p:items-start p:justify-end">
+      <nav class="p:h-1/2 p:flex p:items-start p:justify-end t:pt-20 m:pt-10">
         <ul class="p:-mx-10 p:h-full p:flex p:items-center t:space-y-14 m:space-y-10">
           <li
             v-for="item, index in menu"

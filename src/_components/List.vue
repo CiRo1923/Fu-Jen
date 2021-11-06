@@ -63,9 +63,8 @@ export default {
         FunctionCode: vm.funCode.id,
         Page: vm.nowPage,
         Size: maxItem,
-        OrderByType: 'SortNumber',
-        isChineseActive: /en/.test(vm.language.toLowerCase()) ? 0 : 1,
-        isEnglishActive: /en/.test(vm.language.toLowerCase()) ? 1 : 0
+        isChineseActive: /en/.test(vm.language.toLowerCase()) ? '' : 1,
+        isEnglishActive: /en/.test(vm.language.toLowerCase()) ? 1 : ''
       }).then(res => {
         const { status, data } = res;
         const noePage = Number(vm.nowPage);

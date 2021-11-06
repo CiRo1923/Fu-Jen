@@ -111,9 +111,8 @@ export default {
                   apiData(apiArticles, newsData, vm.news, 2, {
                     CategoryId: 22,
                     FunctionCode: 'LatestNews',
-                    OrderByType: 'SortNumber',
-                    isChineseActive: /en/.test(vm.language.toLowerCase()) ? 0 : 1,
-                    isEnglishActive: /en/.test(vm.language.toLowerCase()) ? 1 : 0
+                    isChineseActive: /en/.test(vm.language.toLowerCase()) ? '' : 1,
+                    isEnglishActive: /en/.test(vm.language.toLowerCase()) ? 1 : ''
                   });
                 }
               }
@@ -136,17 +135,16 @@ export default {
                     FunctionCode: 'LatestNews',
                     ExcludeCategoryString: '快訊',
                     Size: (device() === 'P' ? 15 : 10),
-                    OrderByType: 'SortNumber',
-                    isChineseActive: /en/.test(vm.language.toLowerCase()) ? 0 : 1,
-                    isEnglishActive: /en/.test(vm.language.toLowerCase()) ? 1 : 0
+                    isChineseActive: /en/.test(vm.language.toLowerCase()) ? '' : 1,
+                    isEnglishActive: /en/.test(vm.language.toLowerCase()) ? 1 : ''
                   });
 
                   // 取得 重要連結與公告
                   apiData(apiLinks, linksData, vm.links, (device() === 'P' ? 8 : 5), {
                     CategoryId: 4,
                     TopCount: (device() === 'P' ? 24 : 15),
-                    isChineseActive: /en/.test(vm.language.toLowerCase()) ? 0 : 1,
-                    isEnglishActive: /en/.test(vm.language.toLowerCase()) ? 1 : 0
+                    isChineseActive: /en/.test(vm.language.toLowerCase()) ? '' : 1,
+                    isEnglishActive: /en/.test(vm.language.toLowerCase()) ? 1 : ''
                   });
 
                   // 取得 校園焦點
@@ -154,9 +152,8 @@ export default {
                     FunctionCode: 'CampusFocus',
                     ExcludeCategoryString: '專輯報導',
                     Size: 9,
-                    OrderByType: 'SortNumber',
-                    isChineseActive: /en/.test(vm.language.toLowerCase()) ? 0 : 1,
-                    isEnglishActive: /en/.test(vm.language.toLowerCase()) ? 1 : 0
+                    isChineseActive: /en/.test(vm.language.toLowerCase()) ? '' : 1,
+                    isEnglishActive: /en/.test(vm.language.toLowerCase()) ? 1 : ''
                   });
 
                   // 取得 專題報導
@@ -165,9 +162,8 @@ export default {
                     FunctionCode: 'CampusFocus',
                     IsWithContent: 1,
                     Size: 1,
-                    OrderByType: 'SortNumber',
-                    isChineseActive: /en/.test(vm.language.toLowerCase()) ? 0 : 1,
-                    isEnglishActive: /en/.test(vm.language.toLowerCase()) ? 1 : 0
+                    isChineseActive: /en/.test(vm.language.toLowerCase()) ? '' : 1,
+                    isEnglishActive: /en/.test(vm.language.toLowerCase()) ? 1 : ''
                   }, (reportRes) => {
                     const { items: reportItems } = reportRes;
                     if (reportItems.length !== 0) {
@@ -185,9 +181,8 @@ export default {
                     apiArticles({
                       FunctionCode: 'Audiovisual',
                       Size: 4,
-                      OrderByType: 'SortNumber',
-                      isChineseActive: /en/.test(vm.language.toLowerCase()) ? 0 : 1,
-                      isEnglishActive: /en/.test(vm.language.toLowerCase()) ? 1 : 0
+                      isChineseActive: /en/.test(vm.language.toLowerCase()) ? '' : 1,
+                      isEnglishActive: /en/.test(vm.language.toLowerCase()) ? 1 : ''
                     }).then(videoRes => {
                       const { status: videoStatus, data: videoData } = videoRes;
 
@@ -217,9 +212,8 @@ export default {
                     FunctionCode: 'HonorRoll',
                     IsWithContent: 1,
                     Size: 12,
-                    OrderByType: 'SortNumber',
-                    isChineseActive: /en/.test(vm.language.toLowerCase()) ? 0 : 1,
-                    isEnglishActive: /en/.test(vm.language.toLowerCase()) ? 1 : 0
+                    isChineseActive: /en/.test(vm.language.toLowerCase()) ? '' : 1,
+                    isEnglishActive: /en/.test(vm.language.toLowerCase()) ? 1 : ''
                   });
                 }
               }

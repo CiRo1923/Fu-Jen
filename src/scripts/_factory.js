@@ -173,8 +173,10 @@ export const actionURL = (page, param) => {
             : `${query || newPath}${paramValue}/`;
           query = categoryId;
         } else if (paramName === 'articleCategory') {
-          query = `${query}${paramValue}/`;
+          query = `${query}${paramValue}/1`;
+          console.log(query);
         } else if (paramName === 'page') {
+          // console.log(query);
           query = `${query.replace(/\d+$/, paramValue)}/`;
         } else {
           query = `${query || newPath}${paramName}`;

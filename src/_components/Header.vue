@@ -84,7 +84,10 @@ export default {
       name="U"
       class="assetsKey top-0 left-0 absolute"
     >:::</a>
-    <header>
+    <header
+      class="mHdCnt"
+      :class="{'--width': isHome}"
+    >
       <h1 class="sr-only">
         天主教輔仁大學 FUJEN CATHOLIC UNIVERSITY
       </h1>
@@ -138,7 +141,7 @@ export default {
           </div>
           <div
             v-if="isHome"
-            class="mHdPhotoFrame t:absolute m:relative"
+            class="mHdPhotoFrame p:left-0 pt:absolute m:relative"
           >
             <figure class="mHdFig w-full h-full relative p:overflow-hidden">
               <img

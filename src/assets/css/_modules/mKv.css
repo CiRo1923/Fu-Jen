@@ -31,7 +31,7 @@
 @screen p {
   .mKv {
     &.--width {
-      width: calc(100% - 480px);
+      @apply w-3/4;
     }
   }
 

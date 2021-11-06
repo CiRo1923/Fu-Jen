@@ -1,13 +1,13 @@
 module.exports = {
   HtmlWebpackPlugin: [{
-    filename: 'University/Web/zhTW/Article/CampusFocus/5/2229/index.html',
+    filename: 'University/Web/zhTW/Article/CampusFocus/5/746/index.html',
     template: '_shared/layout.ejs',
     includeName: 'Article/index.ejs',
     title: '',
     description: '',
     chunks: ['article']
   }, {
-    filename: 'University/Web/enUS/Article/CampusFocus/5/2229/index.html',
+    filename: 'University/Web/enUS/Article/CampusFocus/5/746/index.html',
     template: '_shared/layout.ejs',
     includeName: 'Article/index.ejs',
     title: '',
