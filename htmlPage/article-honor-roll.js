@@ -3,84 +3,72 @@ module.exports = {
     filename: 'University/Web/zhTW/Article/HonorRoll/3/3/index.html',
     template: '_shared/layout.ejs',
     includeName: 'Article/index.ejs',
-    title: '',
     description: '',
     chunks: ['article']
   }, {
     filename: 'University/Web/enUS/Article/HonorRoll/3/3/index.html',
     template: '_shared/layout.ejs',
     includeName: 'Article/index.ejs',
-    title: '',
     description: '',
     chunks: ['article']
   }, {
     filename: 'University/Web/zhTW/Article/HonorRoll/3/5/index.html',
     template: '_shared/layout.ejs',
     includeName: 'Article/index.ejs',
-    title: '',
     description: '',
     chunks: ['article']
   }, {
     filename: 'University/Web/enUS/Article/HonorRoll/3/5/index.html',
     template: '_shared/layout.ejs',
     includeName: 'Article/index.ejs',
-    title: '',
     description: '',
     chunks: ['article']
   }, {
     filename: 'University/Web/zhTW/Article/HonorRoll/23/6/index.html',
     template: '_shared/layout.ejs',
     includeName: 'Article/index.ejs',
-    title: '',
     description: '',
     chunks: ['article']
   }, {
     filename: 'University/Web/enUS/Article/HonorRoll/23/6/index.html',
     template: '_shared/layout.ejs',
     includeName: 'Article/index.ejs',
-    title: '',
     description: '',
     chunks: ['article']
   }, {
     filename: 'University/Web/zhTW/Article/HonorRoll/24/7/index.html',
     template: '_shared/layout.ejs',
     includeName: 'Article/index.ejs',
-    title: '',
     description: '',
     chunks: ['article']
   }, {
     filename: 'University/Web/enUS/Article/HonorRoll/24/7/index.html',
     template: '_shared/layout.ejs',
     includeName: 'Article/index.ejs',
-    title: '',
     description: '',
     chunks: ['article']
   }, {
     filename: 'University/Web/zhTW/Article/HonorRoll/25/8/index.html',
     template: '_shared/layout.ejs',
     includeName: 'Article/index.ejs',
-    title: '',
     description: '',
     chunks: ['article']
   }, {
     filename: 'University/Web/enUS/Article/HonorRoll/25/8/index.html',
     template: '_shared/layout.ejs',
     includeName: 'Article/index.ejs',
-    title: '',
     description: '',
     chunks: ['article']
   }, {
     filename: 'University/Web/zhTW/Article/HonorRoll/26/9/index.html',
     template: '_shared/layout.ejs',
     includeName: 'Article/index.ejs',
-    title: '',
     description: '',
     chunks: ['article']
   }, {
     filename: 'University/Web/enUS/Article/HonorRoll/26/9/index.html',
     template: '_shared/layout.ejs',
     includeName: 'Article/index.ejs',
-    title: '',
     description: '',
     chunks: ['article']
   }]

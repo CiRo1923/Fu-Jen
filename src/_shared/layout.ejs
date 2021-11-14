@@ -1,7 +1,7 @@
 <%
-  const TITLENAME = 'MAP 預約顧問 - 人生藍圖畫起來 | 全球人壽 Transglobe';
-  const TITLE = htmlWebpackPlugin.options.title !== 'Webpack App' ? htmlWebpackPlugin.options.title : 'MAP 預約顧問 - 人生藍圖畫起來 | 全球人壽 Transglobe';
-  const COPYRIGHT = '2021 ©本網站版權屬 全球人壽保險股份有限公司所有';
+  const TITLENAME = '輔仁大學全球資訊網';
+  const TITLE = htmlWebpackPlugin.options.title !== 'Webpack App' ? htmlWebpackPlugin.options.title : '輔仁大學全球資訊網';
+  const COPYRIGHT = '2021 ©本網站版權屬 輔仁大學全球資訊網所有';
   const reqFile = require(`../views/${htmlWebpackPlugin.options.includeName}`)({
     htmlWebpackPlugin : htmlWebpackPlugin
   });
@@ -45,8 +45,9 @@
     <input type="hidden" name="articlePath" value="Article/">
     <div class="lWrap">
       <div class="lHd flex-shrink-0" id="header">
+        <h1><%- TITLE %></h1>
       </div>
-      <main class="lMain flex-grow relative">
+      <main class="lMain flex-grow">
         <a
           href="#C"
           title="中央內容區塊"
@@ -56,8 +57,8 @@
         >:::</a>
         <noscript>
           <p>親愛的網友您好！</p>
-          <strong>您必須啟用 Javascript，才能使用「天主教輔仁大學」的完整功能。不過，Javascript 似乎已停用或不受您的瀏覽器支援。請變更瀏覽器的選項，啟用 Javascript，然後<a href="./">再試一次</a>。</strong>
-          <p>天主教輔仁大學關心您！</p>
+          <strong>您必須啟用 Javascript，才能使用「輔仁大學全球資訊網」的完整功能。不過，Javascript 似乎已停用或不受您的瀏覽器支援。請變更瀏覽器的選項，啟用 Javascript，然後<a href="./">再試一次</a>。</strong>
+          <p>輔仁大學全球資訊網關心您！</p>
         </noscript>
         <%- reqFile %>
       </main>

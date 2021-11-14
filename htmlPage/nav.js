@@ -3,70 +3,60 @@ module.exports = {
     filename: 'University/Web/zhTW/AboutFuJen/FactsAtAGlance/index.html',
     template: '_shared/layout.ejs',
     includeName: 'Article/index.ejs',
-    title: '',
     description: '',
     chunks: ['article_nav']
   }, {
     filename: 'University/Web/enUS/AboutFuJen/FactsAtAGlance/index.html',
     template: '_shared/layout.ejs',
     includeName: 'Article/index.ejs',
-    title: '',
     description: '',
     chunks: ['article_nav']
   }, {
     filename: 'University/Web/zhTW/Academics/AcademicUnits/index.html',
     template: '_shared/layout.ejs',
     includeName: 'Article/index.ejs',
-    title: '',
     description: '',
     chunks: ['article_nav']
   }, {
     filename: 'University/Web/enUS/Academics/AcademicUnits/index.html',
     template: '_shared/layout.ejs',
     includeName: 'Article/index.ejs',
-    title: '',
     description: '',
     chunks: ['article_nav']
   }, {
     filename: 'University/Web/zhTW/Academics/CollegeOfLiberalArts/index.html',
     template: '_shared/layout.ejs',
     includeName: 'Article/index.ejs',
-    title: '',
     description: '',
     chunks: ['article_nav']
   }, {
     filename: 'University/Web/enUS/Academics/CollegeOfLiberalArts/index.html',
     template: '_shared/layout.ejs',
     includeName: 'Article/index.ejs',
-    title: '',
     description: '',
     chunks: ['article_nav']
   }, {
     filename: 'University/Web/zhTW/Administration/President/index.html',
     template: '_shared/layout.ejs',
     includeName: 'Article/index.ejs',
-    title: '',
     description: '',
     chunks: ['article_nav']
   }, {
     filename: 'University/Web/enUS/Administration/President/index.html',
     template: '_shared/layout.ejs',
     includeName: 'Article/index.ejs',
-    title: '',
     description: '',
     chunks: ['article_nav']
   }, {
     filename: 'University/Web/zhTW/Administration/Presidentvice-PresidentForAcademicAffairs/index.html',
     template: '_shared/layout.ejs',
     includeName: 'Article/index.ejs',
-    title: '',
     description: '',
     chunks: ['article_nav']
   }, {
     filename: 'University/Web/enUS/Administration/Presidentvice-PresidentForAcademicAffairs/index.html',
     template: '_shared/layout.ejs',
     includeName: 'Article/index.ejs',
-    title: '',
     description: '',
     chunks: ['article_nav']
   }]

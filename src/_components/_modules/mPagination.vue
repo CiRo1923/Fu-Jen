@@ -1,4 +1,6 @@
 <script>
+import { saveScrollTo } from '../../scripts/_common.js';
+
 export default {
   props: {
     firstUrl: {
@@ -17,6 +19,11 @@ export default {
       type: Array,
       default: () => []
     }
+  },
+  data() {
+    return {
+      saveScrollTo: saveScrollTo
+    };
   }
 };
 </script>
@@ -29,6 +36,7 @@ export default {
           v-if="Number(nowPage) !== 1"
           :href="firstUrl"
           class="p-5 p:text-20 t:text-16 m:text-14 flex flex-col justify-items-center"
+          @click="saveScrollTo"
         >
           &lt;&lt;
         </a>
@@ -48,6 +56,7 @@ export default {
         <a
           :href="item.url"
           class="p-5 p:text-16 t:text-14 m:text-12 flex flex-col justify-center"
+          @click="saveScrollTo"
         >
           {{ item.number }}
         </a>
@@ -57,6 +66,7 @@ export default {
           v-if="Number(nowPage) !== pages.length"
           :href="lastUrl"
           class="p-5 p:text-20 t:text-16 m:text-14 flex flex-col justify-items-center"
+          @click="saveScrollTo"
         >
           &gt;&gt;
         </a>

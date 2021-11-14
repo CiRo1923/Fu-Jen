@@ -1,5 +1,6 @@
 <script>
 import mMenu from './_modules/mMenu.vue';
+import { saveScrollTo } from '../scripts/_common.js';
 import {
   language, params, getFunctionCadeData, path, actionURL
 } from '../scripts/_factory.js';
@@ -22,7 +23,8 @@ export default {
       categoryId: new RegExp(path('listPath')).test(window.location.pathname) ? 'listCategory' : 'articleCategory',
       category: Number(params(new RegExp(path('listPath')).test(window.location.pathname) ? 'listPath' : 'categoryId')),
       listPath: path('listPath'),
-      actionURL: actionURL
+      actionURL: actionURL,
+      saveScrollTo: saveScrollTo
     };
   }
 };
@@ -41,6 +43,7 @@ export default {
         :href="actionURL(listPath, [`functionCode-${funCode?.id}`, `${categoryId}-${data.categoryId}`, 'page-1'])"
         :class="{'text-xba79': category === data.categoryId, 'text-xf': category !== data.categoryId}"
         :title="(/en/.test(language) ? data.englishName : data.chineseName)"
+        @click="saveScrollTo($event)"
       >
         <em class="p:text-20 t:text-15 not-italic">{{ /en/.test(language) ? data.englishName : data.chineseName }}</em>
       </a>

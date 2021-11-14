@@ -65,8 +65,8 @@ export default {
 
       return vm.isHome ? color : 'text-x1479';
     },
-    logoPath(src) {
-      return process.env.APP_ENV !== 'dev' ? getImageSrc(src) : '/static/img/home_background.png';
+    logoPath(item) {
+      return getImageSrc(item.logoFilePath);
     }
   }
 };
@@ -85,7 +85,7 @@ export default {
       class="assetsKey top-0 left-0 absolute"
     >:::</a>
     <header
-      class="mHdCnt"
+      class="mHdCnt p:flex-shrink-0"
       :class="{'--width': isHome}"
     >
       <h1 class="sr-only">
@@ -95,14 +95,12 @@ export default {
         class="mHdLogo p:text-center t:px-20 t:py-5 m:px-12 m:py-10"
         :class="[{'--large p:pt-32 p:border-1' : isHome, 'flex-shrink-0 tm:bg-x1479': !isHome}, changeColor(info.styleClass)]"
       >
-        <a
-          class="inline-block"
-          :href="actionURL('index')"
-          title="天主教輔仁大學 FUJEN CATHOLIC UNIVERSITY:回首頁"
-        >
-          <div
+        <div>
+          <a
             v-if="isHome"
-            class="mHdLogoFrame p:mx-auto p:mb-84"
+            class="mHdLogoFrame p:mx-auto p:mb-84 inline-block relative z-1"
+            :href="actionURL('index')"
+            title="天主教輔仁大學 FUJEN CATHOLIC UNIVERSITY:回首頁"
           >
             <m-svg
               v-if="!/en/.test(language)"
@@ -138,23 +136,25 @@ export default {
               svg-icon="logo_mobile"
               alt="天主教輔仁大學 FUJEN CATHOLIC UNIVERSITY"
             />
-          </div>
+          </a>
           <div
             v-if="isHome"
-            class="mHdPhotoFrame p:left-0 pt:absolute m:relative"
+            class="mHdPhotoFrame p:left-0 absolute"
           >
             <figure class="mHdFig w-full h-full relative p:overflow-hidden">
               <img
                 class="pt:top-0 p:right-0 p:absolute"
-                :src="logoPath(info.logoFilePath)"
+                :src="logoPath(info)"
                 alt="天主教輔仁大學 FUJEN CATHOLIC UNIVERSITY"
                 tabindex="-1"
               >
             </figure>
           </div>
-          <div
+          <a
             v-if="!isHome"
-            class="mHdLogoFrame"
+            class="mHdLogoFrame inline-block"
+            :href="actionURL('index')"
+            title="天主教輔仁大學 FUJEN CATHOLIC UNIVERSITY:回首頁"
           >
             <m-svg
               v-if="!/en/.test(language)"
@@ -173,8 +173,8 @@ export default {
               svg-icon="logo_mobile"
               alt="天主教輔仁大學 FUJEN CATHOLIC UNIVERSITY:回首頁"
             />
-          </div>
-        </a>
+          </a>
+        </div>
       </div>
     </header>
     <m-nav

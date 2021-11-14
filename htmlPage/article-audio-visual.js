@@ -3,70 +3,60 @@ module.exports = {
     filename: 'University/Web/zhTW/Article/Audiovisual/38/2235/index.html',
     template: '_shared/layout.ejs',
     includeName: 'Article/index.ejs',
-    title: '',
     description: '',
     chunks: ['article']
   }, {
     filename: 'University/Web/enUS/Article/Audiovisual/38/2235/index.html',
     template: '_shared/layout.ejs',
     includeName: 'Article/index.ejs',
-    title: '',
     description: '',
     chunks: ['article']
   }, {
     filename: 'University/Web/zhTW/Article/Audiovisual/39/21/index.html',
     template: '_shared/layout.ejs',
     includeName: 'Article/index.ejs',
-    title: '',
     description: '',
     chunks: ['article']
   }, {
     filename: 'University/Web/enUS/Article/Audiovisual/39/21/index.html',
     template: '_shared/layout.ejs',
     includeName: 'Article/index.ejs',
-    title: '',
     description: '',
     chunks: ['article']
   }, {
     filename: 'University/Web/zhTW/Article/Audiovisual/40/22/index.html',
     template: '_shared/layout.ejs',
     includeName: 'Article/index.ejs',
-    title: '',
     description: '',
     chunks: ['article']
   }, {
     filename: 'University/Web/enUS/Article/Audiovisual/40/22/index.html',
     template: '_shared/layout.ejs',
     includeName: 'Article/index.ejs',
-    title: '',
     description: '',
     chunks: ['article']
   }, {
     filename: 'University/Web/zhTW/Article/Audiovisual/41/23/index.html',
     template: '_shared/layout.ejs',
     includeName: 'Article/index.ejs',
-    title: '',
     description: '',
     chunks: ['article']
   }, {
     filename: 'University/Web/enUS/Article/Audiovisual/41/23/index.html',
     template: '_shared/layout.ejs',
     includeName: 'Article/index.ejs',
-    title: '',
     description: '',
     chunks: ['article']
   }, {
     filename: 'University/Web/zhTW/Article/Audiovisual/42/24/index.html',
     template: '_shared/layout.ejs',
     includeName: 'Article/index.ejs',
-    title: '',
     description: '',
     chunks: ['article']
   }, {
     filename: 'University/Web/enUS/Article/Audiovisual/42/24/index.html',
     template: '_shared/layout.ejs',
     includeName: 'Article/index.ejs',
-    title: '',
     description: '',
     chunks: ['article']
   }]

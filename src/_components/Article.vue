@@ -1,7 +1,7 @@
 <script>
 import { apiCategories, apiArticles } from '../scripts/_axios.js';
 import {
-  language, params, path, actionURL, getFunctionCadeData, dateReturn
+  language, params, path, actionURL, getFunctionCadeData, dateReturn, getImageSrc
 } from '../scripts/_factory.js';
 import mArticle from './_modules/mArticle.vue';
 
@@ -87,6 +87,20 @@ export default {
       return videoURL
         ? videoURL.match(/(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/ ]{11})/i)[1]
         : videoURL;
+    },
+    getSrc(item) {
+      const vm = this;
+      let src = null;
+
+      if (/en/.test(vm.language.toLowerCase()) && item.englishPicturePath) {
+        src = getImageSrc(item.englishPicturePath);
+      } else if (/tw/.test(vm.language.toLowerCase()) && item.chinesePicturePath) {
+        src = getImageSrc(item.chinesePicturePath);
+      }
+
+      // console.log(item.chinesePicturePath);
+
+      return src;
     }
   }
 };
@@ -95,8 +109,7 @@ export default {
 <template>
   <m-article
     :bread-crumbs="[`${getTitle(funCode)}|||${actionURL(listPath, [funCode.id, '0', '1'])}`,
-                    `${getTitle(typeName)}|||${actionURL(listPath, [funCode.id, params('categoryId'), '1'])}`,
-                    getTitle(article)]"
+                    `${getTitle(typeName)}|||${actionURL(listPath, [funCode.id, params('categoryId'), '1'])}`]"
   >
     <template #article_header>
       {{ getTitle(article) }}
@@ -118,9 +131,20 @@ export default {
       </div>
     </template>
     <template #article_content>
-      <!-- eslint-disable vue/no-v-html -->
-      <div v-html="(/en/.test(language) ? article?.englishContent : article?.chineseContent)" />
-      <!--eslint-enable-->
+      <div>
+        <figure
+          v-if="article?.type === 1 && (/en/.test(language) ? article?.englishPicturePath : article?.chinesePicturePath)"
+          class="p:mb-40 tm:mb-28"
+        >
+          <img
+            :src="getSrc(article)"
+            :alt="(/en/.test(language) ? typeName.englishName : typeName.chineseName)"
+          >
+        </figure>
+        <!-- eslint-disable vue/no-v-html -->
+        <div v-html="(/en/.test(language) ? article?.englishContent : article?.chineseContent)" />
+        <!--eslint-enable-->
+      </div>
       <div
         v-if="getVideo(article)"
         class="video p:mt-20 t:mt-16 m:mt-12"

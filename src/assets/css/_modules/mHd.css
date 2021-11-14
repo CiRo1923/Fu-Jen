@@ -50,6 +50,13 @@
   }
 }
 
+@screen tm {
+  .mHdPhotoFrame {
+    width: 220px;
+    height: calc(443 / 445 * 220px);
+  }
+}
+
 @screen t {
   .mHdLogo {
     height: 86px;
@@ -63,8 +70,6 @@
   .mHdPhotoFrame {
     top: -140px;
     right: 250px;
-    width: 220px;
-    height: calc(443 / 445 * 220px);
   }
 }
 
@@ -80,9 +85,8 @@
     height: calc(64 / 214 * 184px);
   }
 
-  .mHdFig {
-    img {
-      transform: translateY(32px);
-    }
+  .mHdPhotoFrame {
+    top: -100px;
+    right: 55px;
   }
 }

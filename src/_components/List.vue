@@ -1,7 +1,7 @@
 <script>
 import { apiArticles } from '../scripts/_axios.js';
 import {
-  language, params, getFunctionCadeData, path, actionURL, dateReturn, getYoutubeImage, listAllName, getImageSrc
+  j$, language, params, getFunctionCadeData, path, actionURL, dateReturn, getYoutubeImage, listAllName, getImageSrc, scrollTo
 } from '../scripts/_factory.js';
 import mTitle from './_modules/mTitle.vue';
 import mBreadCrumbs from './_modules/mBreadCrumbs.vue';
@@ -63,6 +63,7 @@ export default {
         FunctionCode: vm.funCode.id,
         Page: vm.nowPage,
         Size: maxItem,
+        IsWithContent: 1,
         isChineseActive: /en/.test(vm.language.toLowerCase()) ? '' : 1,
         isEnglishActive: /en/.test(vm.language.toLowerCase()) ? 1 : ''
       }).then(res => {
@@ -113,7 +114,14 @@ export default {
       });
     };
 
-    apiAsync();
+    apiAsync().then(() => {
+      if (sessionStorage.getItem('scrollTo')) {
+        sessionStorage.removeItem('scrollTo');
+        scrollTo({
+          top: (j$('#list').offset().top - parseFloat(j$('#list').css('margin-top'), 10))
+        });
+      }
+    });
   },
   methods: {
     getSrc(item) {
@@ -129,6 +137,14 @@ export default {
       // console.log(item.chinesePicturePath);
 
       return src;
+    },
+    returnHtmlToDescription(item) {
+      const vm = this;
+      let description = /en/.test(vm.language) ? item.englishContent : item.chineseContent;
+
+      description = description ? description.replace(/<[^>]+>/g, '') : null;
+
+      return description;
     }
   }
 };
@@ -144,7 +160,12 @@ export default {
       <header class="mListHd p:mb-32 t:mb-24 m:mb-16">
         <m-title :style="{'main': '--badge'}">
           <template #title>
-            {{ /en/.test(language) ? listCategoryName.englishName : listCategoryName.chineseName }}
+            <p class="m:hidden">
+              {{ /en/.test(language) ? listCategoryName.englishName : listCategoryName.chineseName }}
+            </p>
+            <p class="pt:hidden">
+              {{ /en/.test(language) ? funCode.englishName : funCode.chineseName }}
+            </p>
           </template>
         </m-title>
       </header>
@@ -173,8 +194,8 @@ export default {
                 </span>
               </header>
               <div class="mListItemSecBd">
-                <p class="p:text-20 t:text-14 m:text-12">
-                  {{ /en/.test(language) ? item.englishContent : item.chineseContent }}
+                <p class="break-all p:text-20 t:text-14 m:text-12">
+                  {{ returnHtmlToDescription(item) }}
                 </p>
               </div>
             </section>

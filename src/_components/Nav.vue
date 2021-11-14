@@ -1,7 +1,7 @@
 <script>
 import { apiMenu, apiUserRoles } from '../scripts/_axios.js';
 import {
-  language, functionCode, path, actionURL
+  language, functionCode, path, actionURL, prjs, j$
 } from '../scripts/_factory.js';
 import { ref } from 'vue';
 import Svg from './Svg.vue';
@@ -116,11 +116,24 @@ export default {
     apiAsync().then(() => {
       vm.getMaxHeight();
       window.addEventListener('resize', vm.getMaxHeight);
+
+      prjs.$b.on('keyup', e => {
+        const keyCode = e.keyCode || e.which;
+
+        if (keyCode === 9) {
+          if (j$(e.target).parent().hasClass('.jNavItem'.replace(/^\./, ''))) {
+            j$('.jNavItem').trigger('mouseleave');
+            j$(e.target).parent().trigger('mouseenter');
+          } else if (!j$(e.target).parents('.jNav')) {
+            j$('.jNavItem').trigger('mouseleave');
+          }
+        }
+      });
     });
   },
   methods: {
     startDate(data) {
-      return data.sort((a, b) => (Number(a.sortNumber) < Number(b.sortNumber) ? 1 : -1));
+      return data.sort((a, b) => (Number(a.sortNumber) > Number(b.sortNumber) ? 1 : -1));
     },
     getRel(type) {
       return type === '_blank' ? 'noopener' : null;
@@ -141,6 +154,16 @@ export default {
       const vm = this;
 
       return /en/.test(vm.language) ? 'p:text-16' : 'p:text-18';
+    },
+    mouseenterFun(index) {
+      const vm = this;
+
+      vm.isNav = index;
+    },
+    mouseleaveFun() {
+      const vm = this;
+
+      vm.isNav = null;
     }
   }
 };
@@ -148,7 +171,7 @@ export default {
 
 <template>
   <div
-    class="mNav p:px-60 p:flex-grow p:flex p:items-center"
+    class="mNav p:px-60 p:h-full p:flex-grow p:flex p:items-center"
     :class="{'act': isAct}"
   >
     <div
@@ -159,13 +182,15 @@ export default {
       m:px-32"
       :class="bgColor"
     >
-      <nav class="p:h-1/2 p:flex p:items-start p:justify-end t:pt-20 m:pt-10">
+      <nav class="p:h-1/2 p:flex p:items-start p:justify-end t:pt-20 m:pt-10 jNav">
         <ul class="p:-mx-10 p:h-full p:flex p:items-center t:space-y-14 m:space-y-10">
           <li
             v-for="item, index in menu"
             :key="item.chineseName"
-            class="mNavMainItem relative p:mx-10 p:h-full p:text-x1479 p:hover:text-x0"
+            class="mNavMainItem relative p:mx-10 p:h-full p:text-x1479 p:hover:text-x0 jNavItem"
             :class="[textColor, {'act': isNav === index}]"
+            @mouseenter="mouseenterFun(index)"
+            @mouseleave="mouseleaveFun"
           >
             <a
               v-if="(/en/.test(language) ? item.englishURL : item.chineseURL)"
@@ -184,7 +209,6 @@ export default {
               v-else
               type="button"
               class="w-full flex tm:items-center p:flex-col p:h-full"
-              tabindex="-1"
               @click="isNav = index"
             >
               <em
@@ -297,7 +321,7 @@ export default {
         </div>
       </div>
     </div>
-    <div class="mNavTools p:ml-28 flex-shrink-0 hidden">
+    <div class="mNavTools p:ml-28 flex-shrink-0 tm:hidden">
       <button
         type="button"
         class="mNavSearch"

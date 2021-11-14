@@ -1,19 +1,41 @@
 <script>
 import { apiPpagepictures } from '../scripts/_axios.js';
-import mSlider from './_modules/mSlider.vue';
-import Svg from './Svg.vue';
+import mBanner from './_modules/mBanner.vue';
 import { language, path, getImageSrc } from '../scripts/_factory.js';
 
 export default {
   components: {
-    'm-slider': mSlider,
-    'm-svg': Svg
+    'm-banner': mBanner
   },
   data() {
+    const vm = this;
+
     return {
       language: language(),
       imgPath: path('apiPath'),
-      items: []
+      items: [],
+      dasharray: 0,
+      interval: null,
+      slideOptions: {
+        watchOverflow: true,
+        autoplay: {
+          delay: 8000,
+          waitForTransition: false,
+          disableOnInteraction: false
+        },
+        slidesPerView: 1,
+        nav: true,
+        effect: 'fade',
+        navigation: {
+          prevEl: '.mKvPrev',
+          nextEl: '.mKvNext'
+        },
+        on: {
+          slideChange() {
+            vm.runSvgPath();
+          }
+        }
+      }
     };
   },
   created() {
@@ -38,16 +60,48 @@ export default {
 
     apiAsync();
   },
-  methods: {
-    getImg(data) {
-      const vm = this;
-      let src = '/static/img/banner.jpg';
+  mounted() {
+    const vm = this;
 
-      if (process.env.APP_ENV !== 'dev') {
-        src = /en/.test(vm.language) ? getImageSrc(data.englishFilePath) : getImageSrc(data.chineseFilePath);
+    vm.runSvgPath();
+  },
+  methods: {
+    getSrc(item) {
+      const vm = this;
+      let src = null;
+
+      if (/en/.test(vm.language.toLowerCase()) && item.englishFilePath) {
+        src = getImageSrc(item.englishFilePath);
+      } else if (/tw/.test(vm.language.toLowerCase()) && item.chineseFilePath) {
+        src = getImageSrc(item.chineseFilePath);
       }
 
+      // console.log(item.chinesePicturePath);
+
       return src;
+    },
+    runSvgPath() {
+      const vm = this;
+      let time = 0;
+      const calcTime = 10;
+      const svgPath = () => {
+        vm.dasharray = 0;
+        window.clearInterval(vm.interval);
+        vm.interval = setInterval(() => {
+          time += calcTime;
+          if (time >= vm.slideOptions.autoplay.delay) {
+            time = 0;
+
+            svgPath();
+          } else {
+            vm.dasharray += ((calcTime / vm.slideOptions.autoplay.delay) * 100);
+          }
+        }, calcTime);
+      };
+
+      if (vm.slideOptions.autoplay?.delay) {
+        svgPath();
+      }
     }
   }
 };
@@ -55,11 +109,11 @@ export default {
 
 <template>
   <div class="mKv h-full overflow-hidden">
-    <m-slider
-      :key="`mkv${items.length}`"
-      name="mkv"
+    <m-banner
+      :key="`mKv${items.length}`"
+      name="mKv"
       :items="items"
-      :options="{'items': 1, 'axis': 'vertical', 'autoplay': true}"
+      :options="slideOptions"
       class="relative"
     >
       <template #slider_content="{ data }">
@@ -69,24 +123,33 @@ export default {
           :target="/en/.test(language) ? data.englishURLActionType : data.chineseURLActionType"
           :title="(/en/.test(language) ? data.englishDescription : data.chineseDescription)"
         >
-          <p class="mKvTitle p:text-44 t:text-28 m:text-20 text-xf absolute">
-            {{ /en/.test(language) ? data.englishDescription : data.chineseDescription }}
-          </p>
+          <!-- eslint-disable vue/no-v-html -->
+          <p
+            class="mKvTitle p:text-44 t:text-28 m:text-20 text-xf absolute"
+            v-html="(/en/.test(language) ? data.englishDescription : data.chineseDescription)"
+          />
+          <!--eslint-enable-->
           <figure class="mKvFig top-1/2 left-1/2 flex justify-center absolute">
             <img
               class="max-h-full"
-              :src="getImg(data)"
+              :src="getSrc(data)"
               :alt="(/en/.test(language) ? data.englishDescription : data.chineseDescription)"
             >
           </figure>
         </a>
       </template>
       <template #slider_nav>
-        <m-svg
-          class="fill-xf w-full h-full"
-          svg-icon="chevron"
-        />
+        <svg
+          viewBox="0 0 36 36"
+          class="mKvCir top-0 left-0 w-full h-full absolute"
+        >
+          <path
+            class="mKvPath top-0 left-0 absolute "
+            :stroke-dasharray="`${dasharray}, 100`"
+            d="M18 2a 16 16 0 0 1 0 32a 16 16 0 0 1 0 -32"
+          />
+        </svg>
       </template>
-    </m-slider>
+    </m-banner>
   </div>
 </template>

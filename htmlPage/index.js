@@ -3,7 +3,6 @@ module.exports = {
     filename: 'index.html',
     template: '_shared/layout.ejs',
     includeName: 'index.ejs',
-    title: '',
     headerID: 'headerIdx',
     description: '',
     chunks: ['index']
@@ -11,7 +10,6 @@ module.exports = {
     filename: 'University/Web/enUS/index.html',
     template: '_shared/layout.ejs',
     includeName: 'index.ejs',
-    title: '',
     headerID: 'headerIdx',
     description: '',
     chunks: ['index']
@@ -19,7 +17,6 @@ module.exports = {
     filename: 'University/Prospectivestudents/zhTW/index.html',
     template: '_shared/layout.ejs',
     includeName: 'index.ejs',
-    title: '',
     headerID: 'headerIdx',
     description: '',
     chunks: ['index']
@@ -27,7 +24,6 @@ module.exports = {
     filename: 'University/Prospectivestudents/enUS/index.html',
     template: '_shared/layout.ejs',
     includeName: 'index.ejs',
-    title: '',
     headerID: 'headerIdx',
     description: '',
     chunks: ['index']
@@ -35,7 +31,6 @@ module.exports = {
     filename: 'University/Alumni/zhTW/index.html',
     template: '_shared/layout.ejs',
     includeName: 'index.ejs',
-    title: '',
     headerID: 'headerIdx',
     description: '',
     chunks: ['index']
@@ -43,7 +38,6 @@ module.exports = {
     filename: 'University/Alumni/enUS/index.html',
     template: '_shared/layout.ejs',
     includeName: 'index.ejs',
-    title: '',
     headerID: 'headerIdx',
     description: '',
     chunks: ['index']

@@ -25,10 +25,45 @@
   }
 }
 
+.audioBgFig {
+  opacity: 0.6;
+  z-index: -1;
+  transform: scale(1.25);
+  transition: opacity 0.45s 0.15s, transform 0.45s 0.15s;
+}
+
+.audio {
+  &.--anim {
+    .audioBgFig {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+.audioU2B {
+  width: 100%;
+  height: calc(1500 / 3840 * 100vw);
+  z-index: -1;
+
+  &::before {
+    content: "";
+
+    @apply top-0 left-0 w-full h-full bg-x0 opacity-60 absolute;
+  }
+
+  iframe {
+    width: 100%;
+    height: calc((315 / 560) * 99.3vw);
+    transform: translate(-50%, -50%);
+    z-index: -1;
+  }
+}
+
 @screen p {
   .audioItem {
     &:not(:hover) {
-      transform: translateY(85%);
+      transform: translateY(15%);
     }
   }
 

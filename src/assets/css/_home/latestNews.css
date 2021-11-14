@@ -1,3 +1,30 @@
+.latestNewsFig {
+  opacity: 0.6;
+  transform: scale(1.25);
+  transition-property: transform, opacity;
+  transition-delay: 0.15s;
+  transition-duration: 0.45s;
+
+  &.--delay-1 {
+    transition-duration: 0.6s;
+    transition-delay: 0.3s;
+  }
+
+  &.--delay-2 {
+    transition-duration: 0.75s;
+    transition-delay: 0.45s;
+  }
+}
+
+.latestNews {
+  .--anim {
+    .latestNewsFig {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
 .latestNewsLinks {
   text-overflow: ellipsis;
   display: -webkit-box;

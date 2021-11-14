@@ -1,5 +1,5 @@
 .mNavMainSub {
-  z-index: 1;
+  z-index: 2;
   transition: max-height 0.3s;
 }
 
@@ -55,7 +55,7 @@
   }
 
   .mNavMainItem {
-    &:not(:hover) {
+    &:not(:hover):not(.act) {
       .mNavMainSub {
         max-height: 0 !important;
       }
@@ -63,8 +63,8 @@
   }
 
   .mNavSearch {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
   }
 }
 
@@ -210,6 +210,11 @@
     top: calc((86 - 40) / 2 * 1px);
     right: 20px;
   }
+
+  .mNavSearch {
+    width: 28px;
+    height: 28px;
+  }
 }
 
 @screen m {
@@ -220,5 +225,10 @@
   .mNavCtrl {
     top: calc((76 - 40) / 2 * 1px);
     right: 12px;
+  }
+
+  .mNavSearch {
+    width: 24px;
+    height: 24px;
   }
 }

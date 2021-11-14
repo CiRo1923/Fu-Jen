@@ -1,3 +1,25 @@
+@keyframes animTop {
+  0%,
+  100% {
+    transform: translateY(-8%);
+  }
+
+  50% {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes animBottom {
+  0%,
+  100% {
+    transform: translateY(8%);
+  }
+
+  50% {
+    transform: translateY(0%);
+  }
+}
+
 .honorRoll {
   &::before,
   &::after {
@@ -5,16 +27,21 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 100% auto;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
 
     @apply absolute;
   }
 
   &::before {
     background-image: url(home/honorRoll_text.svg);
+    animation-name: animTop;
   }
 
   &::after {
     background-image: url(home/honorRoll_fujen.svg);
+    animation-name: animBottom;
+    animation-delay: 0.3s;
   }
 
   .tns-nav {
@@ -94,6 +121,15 @@
     &::before {
       width: width('home/honorRoll_mask.svg');
       height: height('home/honorRoll_mask.svg');
+    }
+  }
+
+  .honorRollLink {
+    box-shadow: rgba(#000, 0) 0 0 8px;
+    transition: box-shadow 0.3s;
+
+    &:hover {
+      box-shadow: rgba(#000, 0.5) 0 0 8px;
     }
   }
 }

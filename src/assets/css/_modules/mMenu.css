@@ -2,9 +2,13 @@
   letter-spacing: 6px;
 }
 
+.mMenuFt {
+  z-index: 2;
+}
+
 @screen p {
   .mMenu {
-    width: 480px;
+    width: 25%;
   }
 }
 
@@ -14,6 +18,11 @@
   }
 }
 
-/* @screen m {
-
-} */
+@screen m {
+  .mMenuFt {
+    right: 12px;
+    bottom: -58px;
+    width: 120px;
+    height: 30px;
+  }
+}

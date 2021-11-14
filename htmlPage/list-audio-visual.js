@@ -3,112 +3,96 @@ module.exports = {
     filename: 'University/Web/zhTW/List/Audiovisual/0/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
-    title: '',
     description: '',
     chunks: ['list']
   }, {
     filename: 'University/Web/enUS/List/Audiovisual/0/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
-    title: '',
     description: '',
     chunks: ['list']
   }, {
     filename: 'University/Web/zhTW/List/Audiovisual/38/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
-    title: '',
     description: '',
     chunks: ['list']
   }, {
     filename: 'University/Web/enUS/List/Audiovisual/38/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
-    title: '',
     description: '',
     chunks: ['list']
   }, {
     filename: 'University/Web/zhTW/List/Audiovisual/39/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
-    title: '',
     description: '',
     chunks: ['list']
   }, {
     filename: 'University/Web/enUS/List/Audiovisual/39/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
-    title: '',
     description: '',
     chunks: ['list']
   }, {
     filename: 'University/Web/zhTW/List/Audiovisual/40/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
-    title: '',
     description: '',
     chunks: ['list']
   }, {
     filename: 'University/Web/enUS/List/Audiovisual/40/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
-    title: '',
     description: '',
     chunks: ['list']
   }, {
     filename: 'University/Web/zhTW/List/Audiovisual/41/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
-    title: '',
     description: '',
     chunks: ['list']
   }, {
     filename: 'University/Web/enUS/List/Audiovisual/41/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
-    title: '',
     description: '',
     chunks: ['list']
   }, {
     filename: 'University/Web/zhTW/List/Audiovisual/42/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
-    title: '',
     description: '',
     chunks: ['list']
   }, {
     filename: 'University/Web/enUS/List/Audiovisual/42/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
-    title: '',
     description: '',
     chunks: ['list']
   }, {
     filename: 'University/Prospectivestudents/zhTW/List/Audiovisual/0/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
-    title: '',
     description: '',
     chunks: ['list']
   }, {
     filename: 'University/Prospectivestudents/enUS/List/Audiovisual/0/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
-    title: '',
     description: '',
     chunks: ['list']
   }, {
     filename: 'University/Alumni/zhTW/List/Audiovisual/0/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
-    title: '',
     description: '',
     chunks: ['list']
   }, {
     filename: 'University/Alumni/enUS/List/Audiovisual/0/1/index.html',
     template: '_shared/layout.ejs',
     includeName: 'List/index.ejs',
-    title: '',
     description: '',
     chunks: ['list']
   }]

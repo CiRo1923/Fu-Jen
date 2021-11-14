@@ -8,6 +8,13 @@ const svgRequire = requireContext => requireContext.keys().map(requireContext);
 const req = require.context('../_svg/', true, /\.svg$/);
 svgRequire(req);
 
+export const saveScrollTo = (e) => {
+  e.preventDefault();
+  sessionStorage.setItem('scrollTo', 'true');
+
+  window.location.href = e.currentTarget.href;
+};
+
 // 取得 Information api
 apiInfo().then(res => {
   const { status, data } = res;

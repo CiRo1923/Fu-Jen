@@ -1,5 +1,5 @@
 .mListItemFig {
-  width: 200%;
+  width: 500%;
   transform: translateX(-50%);
 }
 
@@ -25,6 +25,18 @@
 
       @apply w-0 h-0 border-solid;
     }
+  }
+}
+
+.mListItemSecBd {
+  > * {
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+
+    @apply overflow-hidden;
   }
 }
 
@@ -69,6 +81,12 @@
 }
 
 @screen m {
+  .mListHd {
+    .mTitle {
+      padding-right: 132px;
+    }
+  }
+
   .mListItemTitle {
     text-overflow: ellipsis;
     display: -webkit-box;

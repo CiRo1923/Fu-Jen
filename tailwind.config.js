@@ -79,7 +79,7 @@ module.exports = {
         (max-width: 999px) and (max-height: 428px) and (orientation: landscape) and (orientation: landscape) and (min-width: 480px)`
       }],
       m: [{
-        raw: `(max-width: 1000px) and (max-height: 428px) and (orientation: landscape), (max-width: ${CONFIG.mobileMaxWidth - 1}px)`
+        raw: `(max-width: 999px) and (max-height: 428px) and (orientation: landscape), (max-width: ${CONFIG.mobileMaxWidth - 1}px)`
       }],
       t: [{
         raw: `(min-width: ${CONFIG.mobileMaxWidth}px) and (max-width: 1001px) and (min-height: 428px),
@@ -96,7 +96,7 @@ module.exports = {
         max: `${CONFIG.desktopMinWidth}px`
       }],
       p: [{
-        raw: '(min-width: 1023px) and (orientation: landscape)'
+        raw: '(min-width: 1001px) and (orientation: landscape)'
       }],
       pMax: [{
         min: `${CONFIG.desktopMinWidth + 1}px`

@@ -3,7 +3,7 @@ import Svg from './Svg.vue';
 import mSlider from './_modules/mSlider.vue';
 import { apiArticles, apiLinks, apiPositionSetting } from '../scripts/_axios.js';
 import {
-  language, path, actionURL, getFunctionCadeData, getYoutubeImage, dateReturn, device, importantName, getImageSrc
+  prjs, j$, language, path, actionURL, getFunctionCadeData, getYoutubeImage, dateReturn, device, importantName, getImageSrc
 } from '../scripts/_factory.js';
 
 export default {
@@ -30,8 +30,37 @@ export default {
       reportName: null,
       reportMore: null,
       video: null,
-      honorRoll: []
+      honorRoll: [],
+      u2bId: 'AseiHxeWixQ',
+      u2bSet: {
+        rel: 0,
+        version: 3,
+        cc_load_policy: 1,
+        autoplay: 1,
+        mute: 1,
+        showinfo: 0,
+        controls: 0,
+        autohide: 1,
+        loop: 1,
+        vq: 'hd720'
+      }
     };
+  },
+  computed: {
+    u2bOptions() {
+      const vm = this;
+      let options = null;
+
+      Object.keys(vm.u2bSet).forEach((item) => {
+        if (!options) {
+          options = `${item}=${vm.u2bSet[item]}`;
+        } else {
+          options += `&${item}=${vm.u2bSet[item]}`;
+        }
+      });
+
+      return options;
+    }
   },
   created() {
     const vm = this;
@@ -108,7 +137,7 @@ export default {
               // 取得 快訊
                 vm.news = [];
                 if (isActive === 1) {
-                  apiData(apiArticles, newsData, vm.news, 2, {
+                  apiData(apiArticles, newsData, vm.news, 4, {
                     CategoryId: 22,
                     FunctionCode: 'LatestNews',
                     isChineseActive: /en/.test(vm.language.toLowerCase()) ? '' : 1,
@@ -129,6 +158,8 @@ export default {
 
                 if (isActive === 1) {
                   vm.square = true;
+
+                  console.log(device());
 
                   // 取得 最新動態
                   apiData(apiArticles, latestNewsData, vm.latestNews, (device() === 'P' ? 3 : 2), {
@@ -223,11 +254,34 @@ export default {
       }
     };
 
-    apiAsync();
+    apiAsync().then(() => {
+      setTimeout(() => {
+        vm.scrollFun();
+      }, 1000);
+    });
 
     window.addEventListener('resize', apiAsync, false);
+    window.addEventListener('scroll', vm.scrollFun, false);
   },
   methods: {
+    scrollFun() {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const height = prjs.$w.height();
+      const calcH = ((height / 3) * 2);
+      const $area = j$('.jIdxArea');
+
+      for (let i = 0; i < $area[0].length; i += 1) {
+        const $item = $area.eq(i);
+        const offsetTop = $item.offset().top;
+        const itemHeight = $item.height();
+
+        if (scrollTop > (offsetTop - calcH) && (scrollTop < (offsetTop + itemHeight) || scrollTop + height === prjs.$d.height())) {
+          $item.addClass('--anim');
+        } else {
+          $item.removeClass('--anim');
+        }
+      }
+    },
     getFunCode(key) {
       const vm = this;
       const funCode = getFunctionCadeData(key);
@@ -254,26 +308,6 @@ export default {
     getRel(url) {
       return /^https?:\/\//.test(url) ? 'noopener' : null;
     },
-    getHonorRollImg(item) {
-      const vm = this;
-      let src = 'https://img.ltn.com.tw/Upload/sports/page/800/2021/04/20/phpoVHhNe.jpg';
-
-      if (process.env.APP_ENV !== 'dev') {
-        src = /en/.test(vm.language) ? getImageSrc(item.englishPicturePath) : getImageSrc(item.chinesePicturePath);
-      }
-
-      return src;
-    },
-    getCampusFocusImg(item) {
-      const vm = this;
-      let src = 'https://www.fju.edu.tw/showImg/focus/focus1750.jpg';
-
-      if (process.env.APP_ENV !== 'dev') {
-        src = /en/.test(vm.language) ? getImageSrc(item.englishPicturePath) : getImageSrc(item.chinesePicturePath);
-      }
-
-      return src;
-    },
     returnHtmlToDescription(item) {
       const vm = this;
       let description = /en/.test(vm.language) ? item.englishContent : item.chineseContent;
@@ -281,6 +315,20 @@ export default {
       description = description ? description.replace(/<[^>]+>/g, '') : null;
 
       return description;
+    },
+    getSrc(item) {
+      const vm = this;
+      let src = null;
+
+      if (/en/.test(vm.language.toLowerCase()) && item.englishPicturePath) {
+        src = getImageSrc(item.englishPicturePath);
+      } else if (/tw/.test(vm.language.toLowerCase()) && item.chinesePicturePath) {
+        src = getImageSrc(item.chinesePicturePath);
+      }
+
+      // console.log(item.chinesePicturePath);
+
+      return src;
     }
   }
 };
@@ -301,11 +349,11 @@ export default {
           class="relative p:px-80 tm:px-40"
         >
           <template #slider_content="{ data }">
-            <ul class="space-y-10">
+            <ul class="pt:-m-10 pt:flex pt:flex-wrap">
               <li
                 v-for="item, i in data"
                 :key="`${item.chineseName}_${i}`"
-                class="flex items-center"
+                class="pt:p-10 pt:w-1/2 flex items-center"
               >
                 <b
                   class="text-xb139 block flex-shrink-0 p:mr-40 p:text-26 t:mr-24 t:text-20 m:mr-8 m:text-16"
@@ -332,14 +380,14 @@ export default {
       class="latestNews pt:flex"
     >
       <div class="pt:w-1/2">
-        <div class="flex">
+        <div class="flex jIdxArea">
           <section class="section w-1/2 bg-xb139 box-border flex flex-col relative p:p-20 tm:p-8">
             <header class="sectionHd flex-shrink-0 p:mb-16 tm:mb-5">
               <h2 class="text-xf">
                 <strong class="p:text-26 tm:text-15">{{ getFunCode('LatestNews') }}</strong>
               </h2>
             </header>
-            <div class="sectionB flex-grow">
+            <div class="sectionBd flex-grow">
               <m-slider
                 :key="`latestNews_tinySilder_${latestNews.length}`"
                 name="latestNews"
@@ -376,14 +424,15 @@ export default {
               </a>
             </footer>
           </section>
-          <figure class="w-1/2">
+          <figure class="w-1/2 overflow-hidden">
             <img
+              class="latestNewsFig"
               src="~home/latest_news.jpg"
               :alt="getFunCode('LatestNews')"
             >
           </figure>
         </div>
-        <div class="flex flex-row-reverse">
+        <div class="flex flex-row-reverse jIdxArea">
           <section class="section w-1/2 bg-x1479 box-border flex flex-col relative p:p-20 tm:p-8">
             <header class="sectionHd flex-shrink-0 p:mb-16 tm:mb-5">
               <h2 class="text-xf">
@@ -392,7 +441,7 @@ export default {
             </header>
             <div
               v-if="campusFocus.length !== 0"
-              class="sectionBd flex-grow"
+              class="sectionBdd flex-grow"
             >
               <m-slider
                 :key="`campusFocus_tinySilder_${campusFocus.length}`"
@@ -419,11 +468,11 @@ export default {
                           {{ /en/.test(language) ? item.englishName : item.chineseName }}
                         </a>
                       </div>
-                      <div class="campusFocusPhotoFrame">
+                      <div class="campusFocusPhotoFrame p:px-1">
                         <figure class="campusFocusFig w-full h-full overflow-hidden relative">
                           <img
                             class="top-1/2 left-1/2 relative"
-                            :src="getCampusFocusImg(item)"
+                            :src="getSrc(item)"
                             alt=""
                           >
                         </figure>
@@ -442,8 +491,9 @@ export default {
               </a>
             </footer>
           </section>
-          <figure class="w-1/2">
+          <figure class="w-1/2 overflow-hidden">
             <img
+              class="latestNewsFig"
               src="~home/campus_focus.jpg"
               :alt="getFunCode('CampusFocus')"
             >
@@ -451,7 +501,7 @@ export default {
         </div>
       </div>
       <div class="pt:w-1/2">
-        <div class="flex">
+        <div class="flex jIdxArea">
           <section class="section w-1/2 bg-xb139 box-border flex flex-col relative p:p-20 tm:p-8">
             <header class="sectionHd flex-shrink-0 p:mb-16 m:mb-5">
               <h2 class="text-xf">
@@ -460,7 +510,7 @@ export default {
             </header>
             <div
               v-if="links.length !== 0"
-              class="sectionBd flex-grow"
+              class="sectionBdd flex-grow"
             >
               <m-slider
                 :key="`links_tinySilder_${links.length}`"
@@ -489,14 +539,15 @@ export default {
               </m-slider>
             </div>
           </section>
-          <figure class="w-1/2">
+          <figure class="w-1/2 overflow-hidden">
             <img
+              class="latestNewsFig --delay-1"
               src="~home/links.jpg"
               :alt="(/en/.test(language) ? importantName.englishName : importantName.chineseName)"
             >
           </figure>
         </div>
-        <div class="flex flex-row-reverse">
+        <div class="flex flex-row-reverse jIdxArea">
           <section class="section w-1/2 bg-x1479 box-border flex flex-col relative p:p-20 tm:p-8">
             <header class="sectionHd flex-shrink-0 p:mb-16 tm:mb-5">
               <h2 class="text-xf">
@@ -505,7 +556,7 @@ export default {
             </header>
             <div
               v-if="report.length !== 0"
-              class="sectionBd flex-grow"
+              class="sectionBdd flex-grow"
             >
               <m-slider
                 :key="`report_tinySilder_${report.length}`"
@@ -542,8 +593,9 @@ export default {
               </a>
             </footer>
           </section>
-          <figure class="w-1/2">
+          <figure class="w-1/2 overflow-hidden">
             <img
+              class="latestNewsFig --delay-1"
               src="~home/report.jpg"
               :alt="getFunCode('CampusFocus')"
             >
@@ -553,7 +605,7 @@ export default {
     </div>
     <div
       v-if="video"
-      class="audio text-center overflow-hidden relative"
+      class="audio text-center overflow-hidden relative jIdxArea"
     >
       <div class="top-0 left-0 w-full h-full flex flex-col items-center justify-center absolute">
         <div class="p:-mt-40 t:-mt-48">
@@ -573,13 +625,13 @@ export default {
               pt:rounded-12
               t:px-10 t:py-3 t:text-16
               m:px-4 m:py-1 m:text-12 m:rounded-8"
-              :title="more"
+              title="MORE VIDEO"
             >
-              <b>more</b>
+              <b>MORE VIDEO</b>
             </a>
           </div>
         </div>
-        <div class="bottom-0 absolute m:hidden">
+        <div class="bottom-0 mb-20 absolute m:hidden">
           <ul class="flex items-center">
             <li
               v-for="item, index in video"
@@ -604,8 +656,21 @@ export default {
           </ul>
         </div>
       </div>
-      <figure>
+      <div class="audioU2B overflow-hidden relative tm:hidden">
+        <iframe
+          width="100%"
+          height="100%"
+          class="top-1/2 left-1/2 absolute"
+          :src="`https://www.youtube.com/embed/${u2bId}?${u2bOptions}&playlist=${u2bId}`"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        />
+      </div>
+      <figure class="overflow-hidden p:hidden">
         <img
+          class="audioBgFig relative"
           src="~home/video_background.jpg"
           alt="為追求真、善、美、聖 全人教育之師生共同體"
         >
@@ -642,7 +707,7 @@ export default {
                 v-for="item, i in data"
                 :key="`${item.chineseName}_${i}`"
                 class="honorRollItem
-                  pt:w-1/2 pt:flex pt:flex-col"
+                  pt:w-1/2 pt:flex pt:flex-col p:py-8"
               >
                 <section
                   class="bg-xf box-border
@@ -653,7 +718,7 @@ export default {
                   <a
                     :href="actionURL(articlePath, ['HonorRoll', item.categoryId, item.articleId])"
                     :title="(/en/.test(language) ? item.englishName : item.chineseName)"
-                    class="block w-full h-full box-border
+                    class="honorRollLink block w-full h-full box-border
                       p:p-32
                       t:p-16
                       m:p-12"
@@ -691,7 +756,7 @@ export default {
                         <figure class="honorRollFig top-1/2 left-1/2 overflow-hidden relative">
                           <img
                             class="left-1/2 relative"
-                            :src="getHonorRollImg(item)"
+                            :src="getSrc(item)"
                             :alt="(/en/.test(language) ? item.englishName : item.chineseName)"
                           >
                         </figure>
