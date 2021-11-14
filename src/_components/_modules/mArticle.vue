@@ -48,5 +48,11 @@ export default {
         <slot name="article_content" />
       </div>
     </article>
+    <div
+      v-if="$slots.article_loading"
+      class="mArticleLoading"
+    >
+      <slot name="article_loading" />
+    </div>
   </div>
 </template>

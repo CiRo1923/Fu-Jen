@@ -1,0 +1,96 @@
+.mLoadingBd {
+  &::before {
+    left: 50%;
+    transform-origin: center bottom;
+    transition-delay: 0.45s;
+
+    @apply top-0;
+  }
+
+  &::after {
+    left: 75%;
+    transform-origin: center top;
+    transition-delay: 0.6s;
+
+    @apply bottom-0;
+  }
+}
+
+.mLoadingFig {
+  z-index: 1;
+  transform: translateY(-50%);
+  transition: opacity 0.8s;
+
+  @apply opacity-100;
+
+  img {
+    width: auto;
+  }
+}
+
+.mLoading,
+.mLoadingBd {
+  &::before,
+  &::after {
+    content: "";
+    transition-property: height;
+    transition-duration: 0.8s;
+
+    @apply w-1/4 h-full bg-xf absolute;
+  }
+}
+
+.mLoading {
+  &::before {
+    transform-origin: center bottom;
+    transition-delay: 0.15s;
+
+    @apply top-0 left-0;
+  }
+
+  &::after {
+    left: 25%;
+    transform-origin: center top;
+    transition-delay: 0.3s;
+
+    @apply bottom-0;
+  }
+
+  &.--hide {
+    &,
+    .mLoadingBd {
+      &::before,
+      &::after {
+        @apply h-0;
+      }
+    }
+
+    .mLoadingFig {
+      @apply opacity-0;
+    }
+  }
+}
+
+@screen p {
+  .mLoadingFig {
+    img {
+      height: 200px;
+    }
+  }
+}
+
+@screen t {
+  .mLoadingFig {
+    img {
+      height: 160px;
+    }
+  }
+}
+
+@screen m {
+  .mLoadingFig {
+    img {
+      height: 120px;
+    }
+  }
+}

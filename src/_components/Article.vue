@@ -3,10 +3,12 @@ import { apiCategories, apiArticles } from '../scripts/_axios.js';
 import {
   language, params, path, actionURL, getFunctionCadeData, dateReturn, getImageSrc
 } from '../scripts/_factory.js';
+import mLoading from './_modules/mLoading.vue';
 import mArticle from './_modules/mArticle.vue';
 
 export default {
   components: {
+    'm-loading': mLoading,
     'm-article': mArticle
   },
   data() {
@@ -17,6 +19,7 @@ export default {
       dateReturn: dateReturn,
       params: params,
       listPath: path('listPath'),
+      isLoadding: true,
       article: null,
       typeName: {}
     };
@@ -64,7 +67,9 @@ export default {
       });
     };
 
-    apiAsync();
+    apiAsync().then(() => {
+      vm.isLoadding = false;
+    });
   },
   methods: {
     getTitle(article) {
@@ -111,10 +116,16 @@ export default {
     :bread-crumbs="[`${getTitle(funCode)}|||${actionURL(listPath, [funCode.id, '0', '1'])}`,
                     `${getTitle(typeName)}|||${actionURL(listPath, [funCode.id, params('categoryId'), '1'])}`]"
   >
-    <template #article_header>
+    <template
+      v-if="!isLoadding"
+      #article_header
+    >
       {{ getTitle(article) }}
     </template>
-    <template #article_tools>
+    <template
+      v-if="!isLoadding"
+      #article_tools
+    >
       <span class="flex items-center flex-grow">
         <time class="p:text-20 t:text-16 m:text-14 block">{{ dateReturn(article?.startTime) }}</time>
         <small class="p:ml-10 p:text-20 t:ml-8 t:text-16 m:text-14 block">
@@ -130,7 +141,10 @@ export default {
         </a>
       </div>
     </template>
-    <template #article_content>
+    <template
+      v-if="!isLoadding"
+      #article_content
+    >
       <div>
         <figure
           v-if="article?.type === 1 && (/en/.test(language) ? article?.englishPicturePath : article?.chinesePicturePath)"
@@ -159,6 +173,9 @@ export default {
           allowfullscreen
         />
       </div>
+    </template>
+    <template #article_loading>
+      <m-loading :loadend="!isLoadding" />
     </template>
   </m-article>
 </template>

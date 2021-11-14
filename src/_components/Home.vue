@@ -1,5 +1,6 @@
 <script>
 import Svg from './Svg.vue';
+import mLoading from './_modules/mLoading.vue';
 import mSlider from './_modules/mSlider.vue';
 import { apiArticles, apiLinks, apiPositionSetting } from '../scripts/_axios.js';
 import {
@@ -8,6 +9,7 @@ import {
 
 export default {
   components: {
+    'm-loading': mLoading,
     'm-slider': mSlider,
     'm-svg': Svg
   },
@@ -19,6 +21,7 @@ export default {
       dateReturn: dateReturn,
       listPath: path('listPath'),
       articlePath: path('articlePath'),
+      isLoadding: true,
       importantName: importantName,
       positionSetting: false,
       news: [],
@@ -70,6 +73,8 @@ export default {
     let linksData = [];
     let reportData = [];
     let honorRollData = [];
+    let apiLen = 0;
+    let itemLen = 0;
     const forEachData = (arrayName, items, page) => {
       for (let i = 0, d = 0; i < (items.length / page); i += 1) {
         arrayName.push([]);
@@ -113,6 +118,12 @@ export default {
               callback(datas);
             }
           }
+        }).then(() => {
+          apiLen += 1;
+
+          if (itemLen === apiLen) {
+            vm.isLoadding = false;
+          }
         });
       }
     };
@@ -129,6 +140,8 @@ export default {
 
           if (status === 200) {
             const { items } = data.data;
+
+            itemLen = items.length;
 
             for (let i = 0; i < items.length; i += 1) {
               const { isActive, websiteSectionPositionSettingId } = items[i];
@@ -337,7 +350,7 @@ export default {
 <template>
   <div class="home">
     <div
-      v-if="news.length !== 0"
+      v-if="!isLoadding && news.length !== 0"
       class="news overflow-hidden relative p:py-36 t:py-28 m:py-20"
     >
       <div class="mx-auto p:w-cnt t:w-4/6">
@@ -376,7 +389,7 @@ export default {
       </div>
     </div>
     <div
-      v-if="square"
+      v-if="!isLoadding && square"
       class="latestNews pt:flex"
     >
       <div class="pt:w-1/2">
@@ -604,7 +617,7 @@ export default {
       </div>
     </div>
     <div
-      v-if="video"
+      v-if="!isLoadding && video"
       class="audio text-center overflow-hidden relative jIdxArea"
     >
       <div class="top-0 left-0 w-full h-full flex flex-col items-center justify-center absolute">
@@ -677,7 +690,7 @@ export default {
       </figure>
     </div>
     <div
-      v-if="honorRoll.length !== 0"
+      v-if="!isLoadding && honorRoll.length !== 0"
       class="honorRoll text-center bg-xe2 relative
       p:py-40
       t:py-28
@@ -790,5 +803,6 @@ export default {
         </div>
       </div>
     </div>
+    <m-loading :loadend="!isLoadding" />
   </div>
 </template>

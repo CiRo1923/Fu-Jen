@@ -6,9 +6,11 @@ import {
 import mTitle from './_modules/mTitle.vue';
 import mBreadCrumbs from './_modules/mBreadCrumbs.vue';
 import mPagination from './_modules/mPagination.vue';
+import mLoading from './_modules/mLoading.vue';
 
 export default {
   components: {
+    'm-loading': mLoading,
     'm-bread-crumbs': mBreadCrumbs,
     'm-pagination': mPagination,
     'm-title': mTitle
@@ -30,6 +32,7 @@ export default {
       listPath: path('listPath'),
       imgPath: path('apiPath'),
       articlePath: path('articlePath'),
+      isLoadding: true,
       list: null,
       listCategoryName: {
         englishName: listAllName.englishName,
@@ -115,10 +118,16 @@ export default {
     };
 
     apiAsync().then(() => {
+      vm.isLoadding = false;
+
       if (sessionStorage.getItem('scrollTo')) {
         sessionStorage.removeItem('scrollTo');
-        scrollTo({
-          top: (j$('#list').offset().top - parseFloat(j$('#list').css('margin-top'), 10))
+        vm.$nextTick(() => {
+          setTimeout(() => {
+            scrollTo({
+              top: (j$('#list').offset().top - parseFloat(j$('#list').css('margin-top'), 10))
+            });
+          }, 1000);
         });
       }
     });
@@ -153,10 +162,14 @@ export default {
 <template>
   <div class="mx-auto p:w-cnt t:w-4/5 m:mt-24 m:px-12">
     <m-bread-crumbs
+      v-if="!isLoadding"
       :path="[(/en/.test(language) ? funCode.englishName : funCode.chineseName),
               (/en/.test(language) ? listCategoryName.englishName : listCategoryName.chineseName)]"
     />
-    <div class="mList">
+    <div
+      v-if="!isLoadding"
+      class="mList"
+    >
       <header class="mListHd p:mb-32 t:mb-24 m:mb-16">
         <m-title :style="{'main': '--badge'}">
           <template #title>
@@ -244,5 +257,6 @@ export default {
         />
       </footer>
     </div>
+    <m-loading :loadend="!isLoadding" />
   </div>
 </template>
