@@ -63,8 +63,10 @@
   }
 
   .mNavSearch {
-    width: 32px;
-    height: 32px;
+    > svg {
+      width: 32px;
+      height: 32px;
+    }
   }
 }
 
@@ -122,16 +124,6 @@
 
     &::after {
       bottom: 10px;
-    }
-  }
-
-  .mNavTools {
-    &::before {
-      content: "";
-      height: 1px;
-      transform: translateX(-50%);
-
-      @apply top-0 left-1/2 w-screen bg-xf absolute;
     }
   }
 
@@ -211,9 +203,18 @@
     right: 20px;
   }
 
+  .mNavTools {
+    top: 23px;
+    right: 60px;
+    width: 40px;
+    height: 40px;
+  }
+
   .mNavSearch {
-    width: 28px;
-    height: 28px;
+    > svg {
+      width: 28px;
+      height: 28px;
+    }
   }
 }
 
@@ -227,8 +228,17 @@
     right: 12px;
   }
 
+  .mNavTools {
+    top: 18px;
+    right: 52px;
+    width: 40px;
+    height: 40px;
+  }
+
   .mNavSearch {
-    width: 24px;
-    height: 24px;
+    > svg {
+      width: 24px;
+      height: 24px;
+    }
   }
 }

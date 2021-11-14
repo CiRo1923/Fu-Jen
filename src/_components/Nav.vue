@@ -322,15 +322,15 @@ export default {
       </div>
     </div>
     <div class="mNavTools p:ml-28 flex-shrink-0 tm:absolute">
-      <button
-        type="button"
-        class="mNavSearch"
+      <a
+        :href="actionURL(null, ['search'])"
+        class="mNavSearch w-full h-full p:block tm:flex tm:items-center tm:justify-center"
       >
         <m-svg
-          class="w-full h-full p:fill-x1479 tm:fill-xf"
+          class="p:fill-x1479 tm:fill-xf"
           svg-icon="search"
         />
-      </button>
+      </a>
     </div>
     <div class="mNavCtrl p:hidden tm:absolute">
       <button
