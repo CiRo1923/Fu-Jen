@@ -321,13 +321,13 @@ export default {
         </div>
       </div>
     </div>
-    <div class="mNavTools p:ml-28 flex-shrink-0 tm:hidden">
+    <div class="mNavTools p:ml-28 flex-shrink-0 tm:absolute">
       <button
         type="button"
         class="mNavSearch"
       >
         <m-svg
-          class="w-full h-full fill-x1479"
+          class="w-full h-full p:fill-x1479 tm:fill-xf"
           svg-icon="search"
         />
       </button>

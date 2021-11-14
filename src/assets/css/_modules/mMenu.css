@@ -20,9 +20,12 @@
 
 @screen m {
   .mMenuFt {
-    right: 12px;
-    bottom: -58px;
     width: 120px;
     height: 30px;
+
+    &:not(.--article) {
+      right: 12px;
+      bottom: -58px;
+    }
   }
 }

@@ -176,7 +176,7 @@ export const actionURL = (page, param) => {
             : `${query || newPath}${paramValue}/`;
           query = categoryId;
         } else if (paramName === 'articleCategory') {
-          query = `${query}${paramValue}/1`;
+          query = `${query}${paramValue}/`;
           console.log(query);
         } else if (paramName === 'page') {
           // console.log(query);

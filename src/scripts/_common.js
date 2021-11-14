@@ -8,9 +8,13 @@ const svgRequire = requireContext => requireContext.keys().map(requireContext);
 const req = require.context('../_svg/', true, /\.svg$/);
 svgRequire(req);
 
+export const saveScrollToSession = () => {
+  sessionStorage.setItem('scrollTo', 'true');
+};
+
 export const saveScrollTo = (e) => {
   e.preventDefault();
-  sessionStorage.setItem('scrollTo', 'true');
+  saveScrollToSession();
 
   window.location.href = e.currentTarget.href;
 };

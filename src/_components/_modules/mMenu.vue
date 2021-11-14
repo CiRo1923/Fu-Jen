@@ -1,5 +1,5 @@
 <script>
-import { saveScrollTo } from '../../scripts/_common.js';
+import { saveScrollToSession, saveScrollTo } from '../../scripts/_common.js';
 import {
   j$, language, getFunctionCadeData, path, actionURL, listAllName, params
 } from '../../scripts/_factory.js';
@@ -31,6 +31,7 @@ export default {
       listPath: path('listPath'),
       actionURL: actionURL,
       saveScrollTo: saveScrollTo,
+      isArticle: !!document.querySelector('#article'),
       selectValue: Number(params('categoryId'))
     };
   },
@@ -44,10 +45,8 @@ export default {
         const value = $options.eq(i).val();
         const url = $options.eq(i).attr('url');
 
-        console.log(typeof Number(value));
-        console.log(typeof vm.selectValue);
-
         if (Number(value) === Number(vm.selectValue)) {
+          saveScrollToSession();
           window.location.href = url;
         }
       }
@@ -57,7 +56,10 @@ export default {
 </script>
 
 <template>
-  <div class="mMenu pt:h-full pt:bg-x1479 box-border pt:flex-shrink-0 p:px-56 p:py-32 t:px-32 t:py-20">
+  <div
+    class="mMenu pt:h-full pt:bg-x1479 box-border pt:flex-shrink-0 p:px-56 p:py-32 t:px-32 t:py-20"
+    :class="{'m:px-12': isArticle}"
+  >
     <div class="mMenuHd p:mb-10 t:mb-5 m:hidden">
       <p
         class="p:text-30 t:text-20 text-xf"
@@ -93,7 +95,8 @@ export default {
     </ul>
     <footer
       v-if="Array.isArray(menu)"
-      class="mMenuFt pt:hidden m:absolute"
+      class="mMenuFt pt:hidden"
+      :class="{'m:absolute': !isArticle, '--article m:ml-auto m:mt-20': isArticle}"
     >
       <select
         v-model="selectValue"
@@ -112,7 +115,7 @@ export default {
             v-for="item, index in menu"
             :key="`menu_${index}`"
             :value="item.categoryId"
-            :url="actionURL(listPath, [`functionCode-${funCode?.id}`, `listCategory-${item.categoryId}`, 'page-1'])"
+            :url="actionURL(listPath, [`functionCode-${funCode?.id}`, `listCategory-${item.categoryId}`, `${isArticle ? '1' : 'page-1'}`])"
           >
             {{ /en/.test(language) ? item.englishName : item.chineseName }}
           </option>
