@@ -321,10 +321,10 @@ export default {
         </div>
       </div>
     </div>
-    <div class="mNavTools p:ml-28 flex-shrink-0 tm:absolute">
+    <div class="mNavSearch p:ml-28 flex-shrink-0 tm:absolute">
       <a
         :href="actionURL(null, ['search'])"
-        class="mNavSearch w-full h-full p:block tm:flex tm:items-center tm:justify-center"
+        class="w-full h-full p:block tm:flex tm:items-center tm:justify-center"
       >
         <m-svg
           class="p:fill-x1479 tm:fill-xf"

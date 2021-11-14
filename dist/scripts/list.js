@@ -11702,7 +11702,7 @@ exports.Z = void 0;
 
 var _Svg = _interopRequireDefault(__webpack_require__(1798));
 
-var _Nav = _interopRequireDefault(__webpack_require__(8154));
+var _Nav = _interopRequireDefault(__webpack_require__(1141));
 
 var _factory = __webpack_require__(1956);
 
@@ -13272,7 +13272,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 /***/ }),
 
-/***/ 1182:
+/***/ 6160:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -13334,12 +13334,9 @@ var _hoisted_20 = {
 };
 var _hoisted_21 = ["href", "title"];
 var _hoisted_22 = {
-  class: "mNavTools p:ml-28 flex-shrink-0 tm:absolute"
+  class: "mNavSearch p:ml-28 flex-shrink-0 tm:absolute"
 };
-var _hoisted_23 = {
-  type: "button",
-  class: "mNavSearch"
-};
+var _hoisted_23 = ["href"];
 var _hoisted_24 = {
   class: "mNavCtrl p:hidden tm:absolute"
 };
@@ -13446,10 +13443,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     class: "box-border tm:flex tm:flex-col tm:justify-center t:px-16 t:text-15 m:px-12 m:text-13",
     href: $data.actionURL(null, ["language-".concat($setup.langURL)]),
     title: $setup.langText
-  }, (0, _vue.toDisplayString)($setup.langText), 9, _hoisted_21)])])])])])], 2), (0, _vue.createElementVNode)("div", _hoisted_22, [(0, _vue.createElementVNode)("button", _hoisted_23, [(0, _vue.createVNode)(_component_m_svg, {
-    class: "w-full h-full p:fill-x1479 tm:fill-xf",
+  }, (0, _vue.toDisplayString)($setup.langText), 9, _hoisted_21)])])])])])], 2), (0, _vue.createElementVNode)("div", _hoisted_22, [(0, _vue.createElementVNode)("a", {
+    href: $data.actionURL(null, ['search']),
+    class: "w-full h-full p:block tm:flex tm:items-center tm:justify-center"
+  }, [(0, _vue.createVNode)(_component_m_svg, {
+    class: "p:fill-x1479 tm:fill-xf",
     "svg-icon": "search"
-  })])]), (0, _vue.createElementVNode)("div", _hoisted_24, [(0, _vue.createElementVNode)("button", {
+  })], 8, _hoisted_23)]), (0, _vue.createElementVNode)("div", _hoisted_24, [(0, _vue.createElementVNode)("button", {
     class: (0, _vue.normalizeClass)(["mNavCtrlBtn w-full h-full rounded-10 relative", {
       'm:bg-xba79': $props.bgColor == 'm:bg-xf'
     }]),
@@ -17582,7 +17582,7 @@ const __exports__ = /*#__PURE__*/(0,exportHelper/* default */.Z)(Menuvue_type_sc
 
 /***/ }),
 
-/***/ 8154:
+/***/ 1141:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17595,9 +17595,9 @@ __webpack_require__.d(__webpack_exports__, {
   "default": function() { return /* binding */ Nav; }
 });
 
-// EXTERNAL MODULE: ../node_modules/babel-loader/lib/index.js??clonedRuleSet-2.use[0]!../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../node_modules/vue-loader/dist/index.js??ruleSet[1].rules[12].use[0]!./_components/Nav.vue?vue&type=template&id=dee48ea2
-var Navvue_type_template_id_dee48ea2 = __webpack_require__(1182);
-;// CONCATENATED MODULE: ./_components/Nav.vue?vue&type=template&id=dee48ea2
+// EXTERNAL MODULE: ../node_modules/babel-loader/lib/index.js??clonedRuleSet-2.use[0]!../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../node_modules/vue-loader/dist/index.js??ruleSet[1].rules[12].use[0]!./_components/Nav.vue?vue&type=template&id=5c9778d2
+var Navvue_type_template_id_5c9778d2 = __webpack_require__(6160);
+;// CONCATENATED MODULE: ./_components/Nav.vue?vue&type=template&id=5c9778d2
 
 // EXTERNAL MODULE: ../node_modules/babel-loader/lib/index.js??clonedRuleSet-2.use[0]!../node_modules/vue-loader/dist/index.js??ruleSet[1].rules[12].use[0]!./_components/Nav.vue?vue&type=script&lang=js
 var Navvue_type_script_lang_js = __webpack_require__(4569);
@@ -17611,7 +17611,7 @@ var exportHelper = __webpack_require__(6959);
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,exportHelper/* default */.Z)(Navvue_type_script_lang_js/* default */.Z, [['render',Navvue_type_template_id_dee48ea2/* render */.s]])
+const __exports__ = /*#__PURE__*/(0,exportHelper/* default */.Z)(Navvue_type_script_lang_js/* default */.Z, [['render',Navvue_type_template_id_5c9778d2/* render */.s]])
 
 /* harmony default export */ var Nav = (__exports__);
 

@@ -203,15 +203,13 @@
     right: 20px;
   }
 
-  .mNavTools {
+  .mNavSearch {
     top: 23px;
     right: 60px;
     width: 40px;
     height: 40px;
-  }
 
-  .mNavSearch {
-    > svg {
+    svg {
       width: 28px;
       height: 28px;
     }
@@ -228,15 +226,13 @@
     right: 12px;
   }
 
-  .mNavTools {
+  .mNavSearch {
     top: 18px;
     right: 52px;
     width: 40px;
     height: 40px;
-  }
 
-  .mNavSearch {
-    > svg {
+    svg {
       width: 24px;
       height: 24px;
     }
