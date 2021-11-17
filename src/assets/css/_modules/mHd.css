@@ -2,6 +2,7 @@
   @apply h-full;
 }
 
+.mHdLogoFrame,
 .mHdPhotoFrame {
   z-index: 1;
 }

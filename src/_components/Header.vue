@@ -98,7 +98,7 @@ export default {
         <div>
           <a
             v-if="isHome"
-            class="mHdLogoFrame p:mx-auto p:mb-84 inline-block relative z-1"
+            class="mHdLogoFrame p:mx-auto p:mb-84 inline-block relative"
             :href="actionURL('index')"
             title="天主教輔仁大學 FUJEN CATHOLIC UNIVERSITY:回首頁"
           >

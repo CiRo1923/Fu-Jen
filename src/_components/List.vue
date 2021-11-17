@@ -182,7 +182,10 @@ export default {
           </template>
         </m-title>
       </header>
-      <ul class="mListBd p:space-y-80 t:space-y-48 m:space-y-24">
+      <ul
+        v-if="list.length !== 0"
+        class="mListBd p:space-y-80 t:space-y-48 m:space-y-24"
+      >
         <li
           v-for="item in list"
           :key="item.chineseName"
@@ -247,7 +250,18 @@ export default {
           </div>
         </li>
       </ul>
-      <footer class="mListFt text-center">
+      <div
+        v-else
+        class="mListBd"
+      >
+        <p class="text-x057d p:text-24 t:text-18 m:text-15">
+          <b>目前無資料</b>
+        </p>
+      </div>
+      <footer
+        v-if="list.length !== 0"
+        class="mListFt text-center"
+      >
         <m-pagination
           :first-url="actionURL(listPath, [`functionCode-${funCode?.id}`, `listCategory-${params('listPath') || 0}`, 'page-1'])"
           :last-url="actionURL(listPath, [`functionCode-${funCode?.id}`, `listCategory-${params('listPath') || 0}`, `page-${totalPage}`])"

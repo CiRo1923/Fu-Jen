@@ -209,10 +209,13 @@ export default {
                     isChineseActive: /en/.test(vm.language.toLowerCase()) ? '' : 1,
                     isEnglishActive: /en/.test(vm.language.toLowerCase()) ? 1 : ''
                   }, (reportRes) => {
-                    const { items: reportItems } = reportRes;
-                    if (reportItems.length !== 0) {
-                      vm.reportName = /en/.test(vm.language) ? items[0].categoryEnglishName : items[0].categoryName;
-                      vm.reportMore = actionURL(vm.articlePath, ['CampusFocus', (items[0].categoryId + ''), (items[0].articleId + '')]);
+                    const {
+                      categoryEnglishName, categoryName, categoryId
+                    } = reportRes.items[0];
+
+                    if (reportRes.items[0].length !== 0) {
+                      vm.reportName = /en/.test(vm.language) ? categoryEnglishName : categoryName;
+                      vm.reportMore = actionURL(vm.listPath, ['CampusFocus', (categoryId + ''), '1']);
                     }
                   });
                 }

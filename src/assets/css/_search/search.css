@@ -1,0 +1,22 @@
+.search-button {
+  width: 30px;
+  height: 30px;
+}
+
+@screen p {
+  .search-type {
+    width: 600px;
+  }
+}
+
+@screen t {
+  .search-type {
+    width: 500px;
+  }
+}
+
+@screen m {
+  .search-type {
+    width: 260px;
+  }
+}

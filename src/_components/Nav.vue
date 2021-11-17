@@ -1,7 +1,7 @@
 <script>
 import { apiMenu, apiUserRoles } from '../scripts/_axios.js';
 import {
-  language, functionCode, path, actionURL, prjs, j$
+  language, functionCode, path, actionURL, prjs, j$, device
 } from '../scripts/_factory.js';
 import { ref } from 'vue';
 import Svg from './Svg.vue';
@@ -155,15 +155,32 @@ export default {
 
       return /en/.test(vm.language) ? 'p:text-16' : 'p:text-18';
     },
+    clickFun(index, e) {
+      const vm = this;
+
+      if (device() !== 'P') {
+        e.preventDefault();
+
+        if (vm.isNav !== null) {
+          vm.isNav = vm.isNav !== index ? index : null;
+        } else {
+          vm.isNav = index;
+        }
+      }
+    },
     mouseenterFun(index) {
       const vm = this;
 
-      vm.isNav = index;
+      if (device() === 'P') {
+        vm.isNav = index;
+      }
     },
     mouseleaveFun() {
       const vm = this;
 
-      vm.isNav = null;
+      if (device() === 'P') {
+        vm.isNav = null;
+      }
     }
   }
 };
@@ -198,24 +215,32 @@ export default {
               :title="(/en/.test(language) ? item.englishName : item.chineseName)"
               :target="/en/.test(language) ? item.englishURLActionType : item.chineseURLActionType"
               :rel="getRel((/en/.test(language) ? item.englishURLActionType : item.chineseURLActionType))"
-              class="p:h-full block"
-            >
-              <em
-                class="t:text-20 m:text-18 not-italic"
-                :class="setNavFz()"
-              ><strong>{{ /en/.test(language) ? item.englishName : item.chineseName }}</strong></em>
-            </a>
-            <button
-              v-else
-              type="button"
               class="w-full flex tm:items-center p:flex-col p:h-full"
-              @click="isNav = index"
+              @click="clickFun(index, $event)"
             >
               <em
                 class="t:text-20 m:text-18 not-italic"
                 :class="setNavFz()"
               ><strong>{{ /en/.test(language) ? item.englishName : item.chineseName }}</strong></em>
               <m-svg
+                v-if="item.children"
+                class="t:ml-8 m:ml-6 p:hidden"
+                :class="svgColor"
+                svg-icon="arrow_nav"
+              />
+            </a>
+            <button
+              v-else
+              type="button"
+              class="w-full flex tm:items-center p:flex-col p:h-full"
+              @click="clickFun(index, $event)"
+            >
+              <em
+                class="t:text-20 m:text-18 not-italic"
+                :class="setNavFz()"
+              ><strong>{{ /en/.test(language) ? item.englishName : item.chineseName }}</strong></em>
+              <m-svg
+                v-if="item.children"
                 class="t:ml-8 m:ml-6 p:hidden"
                 :class="svgColor"
                 svg-icon="arrow_nav"
@@ -323,8 +348,10 @@ export default {
     </div>
     <div class="mNavSearch p:ml-28 flex-shrink-0 tm:absolute">
       <a
-        :href="actionURL(null, ['search'])"
+        :href="actionURL(null, ['Search'])"
         class="w-full h-full p:block tm:flex tm:items-center tm:justify-center"
+        :title="/en/.test(language) ? 'Search' : '站內搜尋'"
+        :aria-label="/en/.test(language) ? 'Search' : '站內搜尋'"
       >
         <m-svg
           class="p:fill-x1479 tm:fill-xf"

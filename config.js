@@ -9,6 +9,7 @@ const articleLatestNews = require('./htmlPage/article-latest-news.js');
 const articleHonorRoll = require('./htmlPage/article-honor-roll.js');
 const articleAudioVisual = require('./htmlPage/article-audio-visual.js');
 const page = require('./htmlPage/page.js');
+const search = require('./htmlPage/search.js');
 
 module.exports = {
   ieVersion: 0, // 10 或 0
@@ -30,7 +31,7 @@ module.exports = {
   fonts: null,
   proxy: process.env.NODE_ENV === 'development' ? {
     '/**': {
-      target: 'http://api.ideakeys.com',
+      target: 'http://apifju.fju.edu.tw',
       changeOrigin: true
     }
   } : null,
@@ -47,7 +48,8 @@ module.exports = {
       articleLatestNews.HtmlWebpackPlugin,
       articleHonorRoll.HtmlWebpackPlugin,
       articleAudioVisual.HtmlWebpackPlugin,
-      page.HtmlWebpackPlugin
+      page.HtmlWebpackPlugin,
+      search.HtmlWebpackPlugin
     );
 
     // if (process.env.NODE_ENV === 'production') {

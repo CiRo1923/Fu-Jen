@@ -24,7 +24,8 @@ export default {
       category: Number(params(new RegExp(path('listPath')).test(window.location.pathname) ? 'listPath' : 'categoryId')),
       listPath: path('listPath'),
       actionURL: actionURL,
-      saveScrollTo: saveScrollTo
+      saveScrollTo: saveScrollTo,
+      isArticle: !!document.querySelector('#article')
     };
   }
 };
@@ -40,7 +41,7 @@ export default {
     </template>
     <template #menu_content="{ data }">
       <a
-        :href="actionURL(listPath, [`functionCode-${funCode?.id}`, `${categoryId}-${data.categoryId}`, 'page-1'])"
+        :href="actionURL(listPath, [`functionCode-${funCode?.id}`, `${categoryId}-${data.categoryId}`, `${isArticle ? '1' : 'page-1'}`])"
         :class="{'text-xba79': category === data.categoryId, 'text-xf': category !== data.categoryId}"
         :title="(/en/.test(language) ? data.englishName : data.chineseName)"
         @click="saveScrollTo($event)"
